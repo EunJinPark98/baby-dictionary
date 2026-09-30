@@ -1,17 +1,16 @@
 "use client";
 
+import { useActionForm } from "@/components/ui/use-action-form";
 import Link from "next/link";
-import { useActionState } from "react";
 import { Field, FormMessage, TextInput } from "@/components/ui/form";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { signInWithEmail, signUpWithEmail } from "@/lib/actions/auth";
 
 export function LoginForm({ next }: { next: string }) {
-  const [state, formAction] = useActionState(signInWithEmail, null);
-  const errors = state?.fieldErrors ?? {};
+  const { state, pending, formRef, onSubmit, errors } = useActionForm(signInWithEmail);
 
   return (
-    <form action={formAction} className="space-y-4" noValidate>
+    <form ref={formRef} onSubmit={onSubmit} className="space-y-4" noValidate>
       <input type="hidden" name="next" value={next} />
       <Field label="이메일" htmlFor="email" error={errors.email}>
         <TextInput id="email" name="email" type="email" autoComplete="email" inputMode="email" required aria-invalid={Boolean(errors.email)} />
@@ -20,7 +19,7 @@ export function LoginForm({ next }: { next: string }) {
         <TextInput id="password" name="password" type="password" autoComplete="current-password" required aria-invalid={Boolean(errors.password)} />
       </Field>
       <FormMessage state={state?.fieldErrors ? null : state} />
-      <SubmitButton size="lg" className="w-full" pendingText="로그인 중…">
+      <SubmitButton pending={pending} size="lg" className="w-full" pendingText="로그인 중…">
         로그인
       </SubmitButton>
       <p className="text-center text-sm text-ink-soft">
@@ -34,8 +33,7 @@ export function LoginForm({ next }: { next: string }) {
 }
 
 export function SignupForm() {
-  const [state, formAction] = useActionState(signUpWithEmail, null);
-  const errors = state?.fieldErrors ?? {};
+  const { state, pending, formRef, onSubmit, errors } = useActionForm(signUpWithEmail);
 
   if (state?.ok) {
     return (
@@ -52,7 +50,7 @@ export function SignupForm() {
   }
 
   return (
-    <form action={formAction} className="space-y-4" noValidate>
+    <form ref={formRef} onSubmit={onSubmit} className="space-y-4" noValidate>
       <Field label="이메일" htmlFor="email" error={errors.email}>
         <TextInput id="email" name="email" type="email" autoComplete="email" inputMode="email" required aria-invalid={Boolean(errors.email)} />
       </Field>
@@ -78,7 +76,7 @@ export function SignupForm() {
         ) : null}
       </div>
       <FormMessage state={state?.fieldErrors ? null : state} />
-      <SubmitButton size="lg" className="w-full" pendingText="가입 중…">
+      <SubmitButton pending={pending} size="lg" className="w-full" pendingText="가입 중…">
         가입하고 성장지도 만들기
       </SubmitButton>
       <p className="text-center text-sm text-ink-soft">

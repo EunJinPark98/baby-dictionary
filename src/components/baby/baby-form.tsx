@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionForm } from "@/components/ui/use-action-form";
+import { useState } from "react";
 import { ChoiceChips, Field, FormMessage, TextInput } from "@/components/ui/form";
 import { SubmitButton } from "@/components/ui/submit-button";
 import type { ActionState } from "@/lib/actions/types";
@@ -17,12 +18,11 @@ interface BabyFormProps {
 }
 
 export function BabyForm({ action, userId, today, baby = null, photoUrl = null, submitLabel }: BabyFormProps) {
-  const [state, formAction] = useActionState(action, null);
+  const { state, pending, formRef, onSubmit, errors } = useActionForm(action);
   const [uploading, setUploading] = useState(false);
-  const errors = state?.fieldErrors ?? {};
 
   return (
-    <form action={formAction} className="space-y-5" noValidate>
+    <form ref={formRef} onSubmit={onSubmit} className="space-y-5" noValidate>
       <Field label="이름 또는 애칭" htmlFor="name" error={errors.name} hint="예: 한별이">
         <TextInput
           id="name"
@@ -65,7 +65,7 @@ export function BabyForm({ action, userId, today, baby = null, photoUrl = null, 
       />
       {errors.photo_path ? <p className="text-sm text-blush-500">{errors.photo_path}</p> : null}
       <FormMessage state={state?.fieldErrors ? { ok: false, message: state.message } : state} />
-      <SubmitButton size="lg" className="w-full" disabled={uploading}>
+      <SubmitButton pending={pending} size="lg" className="w-full" disabled={uploading}>
         {submitLabel}
       </SubmitButton>
     </form>

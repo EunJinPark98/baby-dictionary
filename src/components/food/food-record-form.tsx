@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionForm } from "@/components/ui/use-action-form";
 import { ChoiceChips, Field, FormMessage, TextArea, TextInput } from "@/components/ui/form";
 import { SubmitButton } from "@/components/ui/submit-button";
 import type { ActionState } from "@/lib/actions/types";
@@ -18,11 +18,10 @@ export function FoodRecordForm({
   today: string;
   birthDate: string;
 }) {
-  const [state, formAction] = useActionState(action, null);
-  const errors = state?.fieldErrors ?? {};
+  const { state, pending, formRef, onSubmit, errors } = useActionForm(action);
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form ref={formRef} onSubmit={onSubmit} className="space-y-5">
       <Field label="처음 먹은 날" htmlFor="first_tried_on" error={errors.first_tried_on}>
         <TextInput
           id="first_tried_on"
@@ -53,7 +52,7 @@ export function FoodRecordForm({
         <TextArea id="memo" name="memo" maxLength={500} defaultValue={record?.memo ?? ""} />
       </Field>
       <FormMessage state={state} />
-      <SubmitButton size="lg" className="w-full">
+      <SubmitButton pending={pending} size="lg" className="w-full">
         기록 저장
       </SubmitButton>
     </form>

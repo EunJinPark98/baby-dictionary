@@ -13,6 +13,8 @@ interface SubmitButtonProps {
   name?: string;
   value?: string;
   disabled?: boolean;
+  /** onSubmit 방식 폼에서 외부 pending 상태를 넘길 때 사용 */
+  pending?: boolean;
 }
 
 /** 폼 제출 중 상태를 표시하는 버튼 (중복 제출 방지) */
@@ -25,8 +27,10 @@ export function SubmitButton({
   name,
   value,
   disabled,
+  pending: pendingOverride,
 }: SubmitButtonProps) {
-  const { pending } = useFormStatus();
+  const status = useFormStatus();
+  const pending = pendingOverride ?? status.pending;
   return (
     <button
       type="submit"

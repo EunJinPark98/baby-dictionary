@@ -3,6 +3,8 @@ export type ActionState = {
   ok: boolean;
   message: string;
   fieldErrors?: Record<string, string>;
+  /** 성공 응답마다 달라지는 값 (클라이언트에서 폼 하위 상태를 초기화할 때 key 로 사용) */
+  nonce?: number;
 } | null;
 
 export function actionError(message: string, fieldErrors?: Record<string, string>): ActionState {
@@ -10,7 +12,7 @@ export function actionError(message: string, fieldErrors?: Record<string, string
 }
 
 export function actionOk(message: string): ActionState {
-  return { ok: true, message };
+  return { ok: true, message, nonce: Date.now() };
 }
 
 /** FormData 에서 공백 제거한 문자열 (없으면 빈 문자열) */
