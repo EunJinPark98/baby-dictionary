@@ -105,12 +105,13 @@ export interface OptionalBabyContext {
  * (Supabase 미설정/비로그인/아기 없음 → null)
  */
 export const getOptionalBabyContext = cache(async (): Promise<OptionalBabyContext | null> => {
+  const cookieStore = await cookies(); // 요청 시점 렌더링으로 고정 (빌드 환경과 무관하게 동일 동작)
   if (!isSupabaseConfigured()) return null;
   const user = await getCurrentUser();
   if (!user) return null;
   const babies = await getBabies();
   if (babies.length === 0) return null;
-  const selectedId = (await cookies()).get(SELECTED_BABY_COOKIE)?.value;
+  const selectedId = cookieStore.get(SELECTED_BABY_COOKIE)?.value;
   const baby = babies.find((b) => b.id === selectedId) ?? babies[0];
   const today = todayIsoDate();
   return { baby, today, age: getBabyAge(baby.birth_date, today) };

@@ -10,8 +10,9 @@ import type { Database } from "./database.types";
  * 사용자 세션(쿠키)을 사용하므로 모든 쿼리에 RLS 가 적용된다.
  */
 export async function createClient() {
-  const { url, anonKey } = requireSupabasePublicEnv();
+  // cookies() 를 먼저 호출해 이 경로를 요청 시점 렌더링(dynamic)으로 만든다.
   const cookieStore = await cookies();
+  const { url, anonKey } = requireSupabasePublicEnv();
 
   return createServerClient<Database>(url, anonKey, {
     cookies: {
