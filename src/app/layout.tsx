@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Gowun_Batang } from "next/font/google";
 import { getSiteUrl } from "@/lib/env";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/seo";
+import { THEME_COLORS, THEME_INIT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 /** 별마마파파 브랜드 제목 서체 (별별 작명소와 동일) */
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05060c",
+  themeColor: THEME_COLORS.light,
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -41,7 +42,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className={`${gowunBatang.variable} h-full antialiased`}>
+    // data-theme 은 아래 인라인 스크립트가 첫 페인트 전에 설정하므로 하이드레이션 경고를 억제한다.
+    <html lang="ko" data-theme="light" className={`${gowunBatang.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className="min-h-full">{children}</body>
     </html>
   );

@@ -21,7 +21,7 @@ export function Logo({ href = "/" }: { href?: string }) {
 /** 페이지 하단: 별마마파파 서비스임을 알리는 서명 */
 export function BrandFooter() {
   return (
-    <footer className="mt-14 border-t border-white/5 px-4 pb-10 pt-10 text-center">
+    <footer className="mt-14 border-t border-line px-4 pb-10 pt-10 text-center">
       <a href="https://byeolmamapapa.com" target="_blank" rel="noopener noreferrer" className="inline-flex flex-col items-center gap-2">
         <Image src="/brand/byeolmamapapa-logo.png" alt="" width={36} height={36} className="rounded-full opacity-85" />
         <span className="font-brand text-[15px] font-bold tracking-[0.06em] text-gold-700">별마마파파</span>

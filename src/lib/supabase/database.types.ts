@@ -504,6 +504,7 @@ export type Database = {
     Functions: {
       is_admin: { Args: Record<string, never>; Returns: boolean };
       owns_baby: { Args: { p_baby_id: string }; Returns: boolean };
+      delete_my_account: { Args: Record<string, never>; Returns: undefined };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;

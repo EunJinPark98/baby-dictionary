@@ -14,7 +14,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   return (
     <div className="min-h-dvh bg-night">
-      <header className="border-b border-white/[0.06] bg-night/80 backdrop-blur-xl">
+      <header className="border-b border-line/80 bg-night/80 backdrop-blur-xl">
         <div className="mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
           <div className="flex items-center gap-3">
             <Logo href="/today" />

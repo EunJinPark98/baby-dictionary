@@ -4,11 +4,10 @@ import { buttonClass } from "@/components/ui/button";
 import { LinkCard } from "@/components/ui/card";
 import { Callout } from "@/components/ui/notice";
 import { PageHeader, SectionTitle } from "@/components/ui/page-header";
-import { signOut } from "@/lib/actions/auth";
 import { selectBaby } from "@/lib/actions/baby";
 import { formatAgeLabel, getBabyAge } from "@/lib/age/age";
 import { formatDotDate } from "@/lib/date/date-only";
-import { getBabyContext, getIsAdmin, getSignedPhotoUrl } from "@/lib/queries/baby";
+import { getBabyContext, getSignedPhotoUrl } from "@/lib/queries/baby";
 import { privateMetadata } from "@/lib/seo";
 
 export const metadata = privateMetadata("우리아기");
@@ -24,7 +23,7 @@ const MENU = [
 
 export default async function BabyPage({ searchParams }: PageProps<"/baby">) {
   const { baby, babies, age, today, user } = await getBabyContext();
-  const [photoUrl, isAdmin, params] = await Promise.all([getSignedPhotoUrl(baby.photo_path), getIsAdmin(), searchParams]);
+  const [photoUrl, params] = await Promise.all([getSignedPhotoUrl(baby.photo_path), searchParams]);
 
   return (
     <div>
@@ -86,21 +85,15 @@ export default async function BabyPage({ searchParams }: PageProps<"/baby">) {
       </Link>
 
       <SectionTitle>계정</SectionTitle>
-      <div className="space-y-2 rounded-2xl border border-line bg-surface p-4">
-        <p className="text-sm text-ink-soft">{user.email}</p>
-        <div className="flex flex-wrap gap-2">
-          {isAdmin ? (
-            <Link href="/admin" className={buttonClass("secondary", "sm")}>
-              관리자 페이지
-            </Link>
-          ) : null}
-          <form action={signOut}>
-            <button type="submit" className={buttonClass("ghost", "sm")}>
-              로그아웃
-            </button>
-          </form>
-        </div>
-      </div>
+      <Link href="/settings" className="card-night flex min-h-14 items-center justify-between rounded-[var(--radius-card)] border px-4 py-3 shadow-[var(--shadow-soft)]">
+        <span>
+          <span className="block font-semibold text-ink">⚙ 설정</span>
+          <span className="block text-[13px] text-ink-faint">{user.email} · 화면 테마 · 비밀번호 · 로그아웃 · 탈퇴</span>
+        </span>
+        <span aria-hidden className="text-ink-faint">
+          ›
+        </span>
+      </Link>
     </div>
   );
 }

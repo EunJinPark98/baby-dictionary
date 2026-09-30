@@ -10,6 +10,7 @@ export const PRIVATE_PATH_PREFIXES = [
   "/development",
   "/baby",
   "/onboarding",
+  "/settings",
   "/food/tried",
   "/admin",
 ] as const;

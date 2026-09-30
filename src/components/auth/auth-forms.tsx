@@ -22,6 +22,11 @@ export function LoginForm({ next }: { next: string }) {
       <SubmitButton pending={pending} size="lg" className="w-full" pendingText="로그인 중…">
         로그인
       </SubmitButton>
+      <p className="text-center text-sm">
+        <Link href="/forgot-password" className="inline-flex min-h-11 items-center text-ink-faint underline underline-offset-2 hover:text-gold-700">
+          비밀번호를 잊으셨나요?
+        </Link>
+      </p>
       <p className="text-center text-sm text-ink-soft">
         아직 계정이 없나요?{" "}
         <Link href="/signup" className="font-semibold text-gold-700 underline underline-offset-2">

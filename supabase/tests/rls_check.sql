@@ -122,4 +122,39 @@ begin
 end;
 $$;
 
+-- 9) 회원 탈퇴: 비로그인은 호출 불가, 로그인 사용자는 "자기 자신만" 삭제된다
+do $$
+begin
+  begin
+    perform public.delete_my_account();
+    raise exception 'RLS FAIL: anon could call delete_my_account';
+  exception when insufficient_privilege then null;
+  end;
+end;
+$$;
+
+reset role;
+insert into public.babies (owner_id, name, birth_date)
+values ('22222222-2222-4222-8222-222222222222', '달이', '2026-02-01');
+set local role authenticated;
+select set_config('request.jwt.claim.sub', '22222222-2222-4222-8222-222222222222', true);
+select set_config('request.jwt.claims', '{"sub":"22222222-2222-4222-8222-222222222222","role":"authenticated"}', true);
+select public.delete_my_account();
+reset role;
+do $$
+declare
+  n integer;
+begin
+  select count(*) into n from auth.users where id = '22222222-2222-4222-8222-222222222222';
+  if n <> 0 then raise exception 'RLS FAIL: account B not deleted'; end if;
+  select count(*) into n from public.babies where owner_id = '22222222-2222-4222-8222-222222222222';
+  if n <> 0 then raise exception 'RLS FAIL: babies of B not cascaded'; end if;
+  select count(*) into n from auth.users where id = '11111111-1111-4111-8111-111111111111';
+  if n <> 1 then raise exception 'RLS FAIL: account A affected by B deletion'; end if;
+  select count(*) into n from public.growth_records;
+  if n <> 1 then raise exception 'RLS FAIL: A records affected'; end if;
+  raise notice 'RLS account deletion OK';
+end;
+$$;
+
 rollback;

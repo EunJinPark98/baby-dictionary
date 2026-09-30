@@ -3,7 +3,7 @@
 export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <html lang="ko">
-      <body style={{ fontFamily: "sans-serif", background: "#05060c", color: "#f6f6f8", textAlign: "center", padding: "4rem 1.5rem" }}>
+      <body style={{ fontFamily: "sans-serif", background: "#fbf8f1", color: "#2a2530", textAlign: "center", padding: "4rem 1.5rem" }}>
         <p style={{ fontSize: "3rem" }} aria-hidden>
           🌧️
         </p>

@@ -13,7 +13,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/map", label: "성장지도", icon: "map", match: ["/map"] },
   { href: "/food", label: "이유식", icon: "food", match: ["/food"] },
   { href: "/play", label: "놀이", icon: "play", match: ["/play"] },
-  { href: "/baby", label: "우리아기", icon: "baby", match: ["/baby", "/development"] },
+  { href: "/baby", label: "우리아기", icon: "baby", match: ["/baby", "/development", "/settings"] },
 ];
 
 export function isNavActive(item: NavItem, pathname: string): boolean {

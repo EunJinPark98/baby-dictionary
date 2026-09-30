@@ -11,7 +11,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="주요 메뉴"
-      className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-white/[0.06] bg-night/85 backdrop-blur-xl md:hidden"
+      className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-line/80 bg-night/85 backdrop-blur-xl md:hidden"
     >
       <ul className="mx-auto grid max-w-lg grid-cols-5">
         {NAV_ITEMS.map((item) => {
