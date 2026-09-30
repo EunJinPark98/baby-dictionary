@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { cache } from "react";
 import { getBabyAge, type BabyAge } from "@/lib/age/age";
 import { todayIsoDate, type IsoDate } from "@/lib/date/date-only";
+import { isSupabaseConfigured } from "@/lib/env";
 import { createClient, type ServerSupabaseClient } from "@/lib/supabase/server";
 import type { BabyRow } from "@/lib/supabase/database.types";
 import type { User } from "@supabase/supabase-js";
@@ -91,4 +92,26 @@ export const getIsAdmin = cache(async (): Promise<boolean> => {
   const supabase = await createClient();
   const { data } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   return data?.role === "admin";
+});
+
+export interface OptionalBabyContext {
+  baby: BabyRow;
+  age: BabyAge;
+  today: IsoDate;
+}
+
+/**
+ * 공개 페이지에서 "로그인했다면" 아기 정보로 개인화할 때 사용. 리다이렉트하지 않는다.
+ * (Supabase 미설정/비로그인/아기 없음 → null)
+ */
+export const getOptionalBabyContext = cache(async (): Promise<OptionalBabyContext | null> => {
+  if (!isSupabaseConfigured()) return null;
+  const user = await getCurrentUser();
+  if (!user) return null;
+  const babies = await getBabies();
+  if (babies.length === 0) return null;
+  const selectedId = (await cookies()).get(SELECTED_BABY_COOKIE)?.value;
+  const baby = babies.find((b) => b.id === selectedId) ?? babies[0];
+  const today = todayIsoDate();
+  return { baby, today, age: getBabyAge(baby.birth_date, today) };
 });
