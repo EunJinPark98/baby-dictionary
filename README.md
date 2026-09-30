@@ -77,7 +77,7 @@ Supabase 환경변수가 없어도 빌드와 공개 페이지 렌더링은 동�
 
 1. **프로젝트 생성** 후 Project Settings → API 에서 URL / anon key 를 `.env.local` 에 입력.
 2. **DB 마이그레이션 실행** (둘 중 하나)
-   - SQL Editor: `supabase/migrations/20260930000000_init.sql` 전체 실행 → `supabase/seed.sql` 실행
+   - SQL Editor: `supabase/migrations/` 의 파일을 이름 순서대로 실행 (`20260930000000_init.sql` → `20261001000000_account_deletion.sql`) → `supabase/seed.sql` 실행
    - Supabase CLI:
      ```bash
      npx supabase link --project-ref <ref>
@@ -85,7 +85,7 @@ Supabase 환경변수가 없어도 빌드와 공개 페이지 렌더링은 동�
      psql "<connection string>" -f supabase/seed.sql   # 샘플 콘텐츠
      ```
      (로컬 Supabase 사용 시 `npx supabase init` 후 `npx supabase db reset` 이 마이그레이션+seed 를 함께 실행)
-3. **RLS 검증 (권장)**: SQL Editor 에서 `supabase/tests/rls_check.sql` 실행 → `RLS OK`, `RLS owner OK`, `RLS admin OK`, `RLS anon OK` NOTICE 확인. (트랜잭션 롤백되어 데이터가 남지 않음)
+3. **RLS 검증 (권장)**: SQL Editor 에서 `supabase/tests/rls_check.sql` 실행 → `RLS OK`, `RLS owner OK`, `RLS admin OK`, `RLS anon OK`, `RLS account deletion OK` NOTICE 확인. (트랜잭션 롤백되어 데이터가 남지 않음)
 4. **Auth → URL Configuration**
    - Site URL: 배포 도메인 (예: `https://your-domain.com`)
    - Redirect URLs: `http://localhost:3000/auth/callback`, `https://your-domain.com/auth/callback`
@@ -98,6 +98,18 @@ Supabase 환경변수가 없어도 빌드와 공개 페이지 렌더링은 동�
    ```
    사용자는 스스로 role 을 바꿀 수 없습니다(컬럼 권한 + RLS).
 8. (선택) **카카오/Google 로그인**: Supabase Auth 에서 provider 를 켜고 `NEXT_PUBLIC_AUTH_PROVIDERS=kakao,google` 설정. 코드 수정은 필요 없습니다.
+
+### 도메인 없이 테스트 URL 만들기 (약 10분, 무료)
+
+도메인이 없어도 Vercel 이 `https://<프로젝트명>.vercel.app` 주소를 줍니다.
+
+1. [supabase.com](https://supabase.com) 에서 무료 프로젝트 생성 → SQL Editor 에서 위 2번(마이그레이션 2개 + seed) 실행
+2. Authentication → Providers → Email 에서 **Confirm email 을 끄면** 가입 즉시 로그인되어 테스트가 편해요 (공개 전 다시 켜기)
+3. [vercel.com](https://vercel.com) → Add New Project → GitHub 저장소 `baby-dictionary` 선택, 브랜치 `claude/baby-star-map-mvp`
+4. Environment Variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SITE_URL`(= 배포된 vercel.app 주소) → Deploy
+5. Supabase Authentication → URL Configuration 의 Site URL 과 Redirect URLs 에 `https://<프로젝트명>.vercel.app` 와 `https://<프로젝트명>.vercel.app/auth/callback` 추가
+
+Supabase 없이 배포해도 빌드는 되지만, 로그인·기록 기능은 동작하지 않고 콘텐츠도 비어 보여요.
 
 ### Vercel 배포
 
