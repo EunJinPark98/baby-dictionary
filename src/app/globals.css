@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/*
+ * 아기별 지도 디자인 토큰
+ * 따뜻한 아이보리 배경 + 연보라(주색) + 별빛 노랑 + 아주 연한 핑크/블루 포인트
+ */
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", "Segoe UI", sans-serif;
+
+  --color-ivory: #fffcf5;
+  --color-cream: #fff6e5;
+  --color-line: #ece6f4;
+  --color-ink: #2e2a3a;
+  --color-ink-soft: #5f5a70;
+  --color-ink-faint: #8a8599;
+
+  --color-lavender-50: #f6f3ff;
+  --color-lavender-100: #ece6ff;
+  --color-lavender-200: #dcd2ff;
+  --color-lavender-300: #c0b1fb;
+  --color-lavender-400: #a18ef2;
+  --color-lavender-500: #8671e4;
+  --color-lavender-600: #6e58cf;
+  --color-lavender-700: #5944ad;
+
+  --color-star-50: #fffaeb;
+  --color-star-100: #fff2cc;
+  --color-star-200: #ffe499;
+  --color-star-300: #ffd566;
+  --color-star-400: #ffc53d;
+  --color-star-500: #f0ad0e;
+  --color-star-700: #8a5a00;
+
+  --color-blush-50: #fff4f7;
+  --color-blush-100: #fde7ee;
+  --color-blush-500: #d9587f;
+  --color-sky-50: #f2f8fe;
+  --color-sky-100: #e3f0fc;
+  --color-sky-600: #2f73b5;
+  --color-mint-100: #e3f6ec;
+  --color-mint-700: #237a4b;
+
+  --radius-card: 1.5rem;
+  --shadow-soft: 0 1px 2px rgb(46 42 58 / 0.04), 0 6px 20px -8px rgb(110 88 207 / 0.18);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 하단 고정 네비게이션 높이 + iOS 홈 인디케이터 영역 */
+.pb-nav {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-lavender-400);
+  outline-offset: 2px;
+  border-radius: 0.75rem;
+}
+
+/* details/summary 기본 마커 제거 (성장지도 등 펼침 카드) */
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.85;
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
