@@ -16,7 +16,7 @@ export const metadata = privateMetadata("우리아기");
 const MENU = [
   { href: "/baby/growth", emoji: "📏", title: "성장 기록", description: "키·몸무게·머리둘레" },
   { href: "/baby/vaccines", emoji: "💉", title: "예방접종", description: "접종 일정과 완료 기록" },
-  { href: "/baby/milestones", emoji: "⭐", title: "첫해 성장 순간", description: "첫 뒤집기, 첫니, 첫걸음…" },
+  { href: "/baby/milestones", emoji: "✨", title: "첫해 성장 순간", description: "첫 뒤집기, 첫니, 첫걸음…" },
   { href: "/development", emoji: "🧠", title: "발달 기록", description: "하고 있어요 · 아직이에요" },
   { href: "/food/tried", emoji: "🥕", title: "먹어본 재료", description: "처음 먹은 날과 반응" },
   { href: "/baby/favorites", emoji: "★", title: "저장한 콘텐츠", description: "놀이·레시피·재료" },
@@ -71,9 +71,9 @@ export default async function BabyPage({ searchParams }: PageProps<"/baby">) {
                 <button
                   type="submit"
                   disabled={selected}
-                  className={`flex min-h-14 w-full items-center justify-between rounded-2xl border px-4 text-left ${selected ? "border-lavender-300 bg-lavender-50" : "border-line bg-white"}`}
+                  className={`flex min-h-14 w-full items-center justify-between rounded-2xl border px-4 text-left ${selected ? "border-gold-300 bg-gold-50" : "border-line bg-surface"}`}
                 >
-                  <span className="font-semibold text-ink">⭐ {b.name}</span>
+                  <span className="font-semibold text-ink">✦ {b.name}</span>
                   <span className="text-sm text-ink-soft">{selected ? "보고 있어요" : formatAgeLabel(bAge)}</span>
                 </button>
               </form>
@@ -86,7 +86,7 @@ export default async function BabyPage({ searchParams }: PageProps<"/baby">) {
       </Link>
 
       <SectionTitle>계정</SectionTitle>
-      <div className="space-y-2 rounded-2xl border border-line bg-white p-4">
+      <div className="space-y-2 rounded-2xl border border-line bg-surface p-4">
         <p className="text-sm text-ink-soft">{user.email}</p>
         <div className="flex flex-wrap gap-2">
           {isAdmin ? (

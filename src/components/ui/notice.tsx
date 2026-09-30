@@ -6,8 +6,10 @@ export const MEDICAL_DISCLAIMER =
 
 export function Disclaimer({ children = MEDICAL_DISCLAIMER, className = "" }: { children?: ReactNode; className?: string }) {
   return (
-    <p className={`flex gap-2 rounded-2xl bg-sky-50 px-4 py-3 text-[13px] leading-relaxed text-ink-soft ${className}`}>
-      <span aria-hidden>💬</span>
+    <p className={`flex gap-2.5 rounded-2xl border border-line bg-surface/60 px-4 py-3 text-[13px] leading-relaxed text-ink-faint ${className}`}>
+      <span aria-hidden className="text-gold-500">
+        ✦
+      </span>
       <span>{children}</span>
     </p>
   );
@@ -15,9 +17,9 @@ export function Disclaimer({ children = MEDICAL_DISCLAIMER, className = "" }: { 
 
 export function Callout({ emoji = "💡", children, tone = "star" }: { emoji?: string; children: ReactNode; tone?: "star" | "blush" | "lavender" }) {
   const toneClass = {
-    star: "bg-star-50 border-star-100",
-    blush: "bg-blush-50 border-blush-100",
-    lavender: "bg-lavender-50 border-lavender-100",
+    star: "border-gold-500/25 bg-star-50",
+    blush: "border-blush-500/25 bg-blush-50",
+    lavender: "border-gold-500/25 bg-gold-50",
   }[tone];
   return (
     <div className={`flex gap-2.5 rounded-2xl border px-4 py-3 text-sm leading-relaxed text-ink ${toneClass}`}>

@@ -32,7 +32,7 @@ export default async function IngredientsPage() {
                 <li key={category}>
                   <Link
                     href={`#${category}`}
-                    className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-line bg-white px-4 text-sm font-semibold text-ink-soft"
+                    className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-line bg-surface px-4 text-sm font-semibold text-ink-soft"
                   >
                     {FOOD_CATEGORIES[category].emoji} {FOOD_CATEGORIES[category].label}
                   </Link>

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { BottomNav, TopNav } from "@/components/layout/bottom-nav";
-import { Logo } from "@/components/layout/logo";
+import { BrandFooter, Logo } from "@/components/layout/logo";
 
 /**
  * 서비스 앱 셸: 상단 로고(+데스크톱 네비) / 본문 / 모바일 하단 고정 네비.
@@ -9,15 +9,18 @@ import { Logo } from "@/components/layout/logo";
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-dvh">
-      <header className="sticky top-0 z-30 border-b border-line/70 bg-ivory/90 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-4">
+      <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-night/75 backdrop-blur-xl">
+        <div className="mx-auto flex h-15 max-w-3xl items-center justify-between px-4">
           <Logo href="/today" />
           <TopNav />
         </div>
       </header>
-      <main id="main" className="pb-nav mx-auto max-w-3xl px-4 pt-5 md:pb-16">
-        {children}
-      </main>
+      <div className="pb-nav md:pb-0">
+        <main id="main" className="mx-auto max-w-3xl px-4 pt-6">
+          {children}
+        </main>
+        <BrandFooter />
+      </div>
       <BottomNav />
     </div>
   );

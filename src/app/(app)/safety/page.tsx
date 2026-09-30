@@ -39,7 +39,7 @@ export default async function SafetyPage() {
           {sorted.map((guide) => (
             <li key={guide.id}>
               <Card as="article">
-                <div className="flex flex-wrap items-center gap-2 text-[13px] font-semibold text-lavender-700">
+                <div className="flex flex-wrap items-center gap-2 text-[13px] font-semibold text-gold-700">
                   {guide.trigger_label ? <span>{guide.trigger_label}</span> : null}
                   <span className="text-ink-faint">{formatMonthRange(guide.min_month, guide.max_month)}</span>
                   <SampleBadge show={guide.is_sample} />

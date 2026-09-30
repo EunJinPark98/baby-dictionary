@@ -24,7 +24,7 @@ export function LoginForm({ next }: { next: string }) {
       </SubmitButton>
       <p className="text-center text-sm text-ink-soft">
         아직 계정이 없나요?{" "}
-        <Link href="/signup" className="font-semibold text-lavender-700 underline underline-offset-2">
+        <Link href="/signup" className="font-semibold text-gold-700 underline underline-offset-2">
           회원가입
         </Link>
       </p>
@@ -42,7 +42,7 @@ export function SignupForm() {
           💌
         </p>
         <FormMessage state={state} />
-        <Link href="/login" className="inline-block text-sm font-semibold text-lavender-700 underline underline-offset-2">
+        <Link href="/login" className="inline-block text-sm font-semibold text-gold-700 underline underline-offset-2">
           로그인 화면으로
         </Link>
       </div>
@@ -60,13 +60,13 @@ export function SignupForm() {
       <Field label="비밀번호 확인" htmlFor="passwordConfirm" error={errors.passwordConfirm}>
         <TextInput id="passwordConfirm" name="passwordConfirm" type="password" autoComplete="new-password" required aria-invalid={Boolean(errors.passwordConfirm)} />
       </Field>
-      <div className="rounded-2xl bg-white/80 p-4 text-[13px] leading-relaxed text-ink-soft">
+      <div className="rounded-2xl bg-surface/80 p-4 text-[13px] leading-relaxed text-ink-soft">
         <p className="font-semibold text-ink">개인정보 수집·이용 안내</p>
         <p className="mt-1">
           로그인을 위한 이메일, 아기 기록을 위한 이름(애칭)·생년월일과 선택 정보(성별·사진·기록)만 저장해요. 기록은 본인만 볼 수 있어요.
         </p>
         <label className="mt-3 flex min-h-11 cursor-pointer items-center gap-3 font-medium text-ink">
-          <input type="checkbox" name="agree" className="size-5 accent-lavender-600" />
+          <input type="checkbox" name="agree" className="size-5 accent-gold-600" />
           동의합니다
         </label>
         {errors.agree ? (
@@ -81,7 +81,7 @@ export function SignupForm() {
       </SubmitButton>
       <p className="text-center text-sm text-ink-soft">
         이미 계정이 있나요?{" "}
-        <Link href="/login" className="font-semibold text-lavender-700 underline underline-offset-2">
+        <Link href="/login" className="font-semibold text-gold-700 underline underline-offset-2">
           로그인
         </Link>
       </p>

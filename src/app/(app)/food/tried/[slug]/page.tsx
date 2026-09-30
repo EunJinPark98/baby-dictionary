@@ -34,11 +34,8 @@ export default async function FoodRecordPage({ params }: PageProps<"/food/tried/
       <PageHeader
         back={{ href: "/food/tried", label: "먹어본 재료" }}
         eyebrow={withPossessive(baby.name)}
-        title={
-          <span>
-            <span aria-hidden>{food.emoji}</span> {food.name} 기록
-          </span>
-        }
+        icon={food.emoji}
+        title={`${food.name} 기록`}
       />
       {food.allergy_note ? (
         <div className="mb-4">

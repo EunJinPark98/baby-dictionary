@@ -41,7 +41,7 @@ export default async function GrowthPage({ searchParams }: PageProps<"/baby/grow
             href={`/baby/growth?m=${key}`}
             scroll={false}
             aria-current={key === measure ? "page" : undefined}
-            className={`flex min-h-11 items-center justify-center rounded-2xl border text-sm font-semibold ${key === measure ? "border-lavender-400 bg-lavender-100 text-lavender-700" : "border-line bg-white text-ink-soft"}`}
+            className={`flex min-h-11 items-center justify-center rounded-2xl border text-sm font-semibold ${key === measure ? "border-gold-400 bg-gold-100 text-gold-700" : "border-line bg-surface text-ink-soft"}`}
           >
             {GROWTH_LIMITS[key].label}
           </Link>
@@ -66,12 +66,12 @@ export default async function GrowthPage({ searchParams }: PageProps<"/baby/grow
 
       <SectionTitle>기록 목록</SectionTitle>
       {records.length === 0 ? (
-        <p className="rounded-2xl bg-white/70 px-4 py-4 text-sm text-ink-soft">아직 기록이 없어요.</p>
+        <p className="rounded-2xl bg-surface/70 px-4 py-4 text-sm text-ink-soft">아직 기록이 없어요.</p>
       ) : (
-        <div className="overflow-x-auto rounded-2xl border border-line bg-white">
+        <div className="overflow-x-auto rounded-2xl border border-line bg-surface">
           <table className="w-full text-sm">
             <caption className="sr-only">성장 기록 표</caption>
-            <thead className="bg-lavender-50 text-left text-[13px] text-ink-soft">
+            <thead className="bg-gold-50 text-left text-[13px] text-ink-soft">
               <tr>
                 <th scope="col" className="px-3 py-2.5 font-semibold">날짜</th>
                 <th scope="col" className="px-2 py-2.5 text-right font-semibold">키</th>

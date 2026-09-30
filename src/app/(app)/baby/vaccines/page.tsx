@@ -20,7 +20,7 @@ export const metadata = privateMetadata("예방접종");
 
 const statusTone = {
   check: "bg-blush-100 text-blush-500",
-  due: "bg-lavender-100 text-lavender-700",
+  due: "bg-gold-100 text-gold-700",
   soon: "bg-star-100 text-star-700",
   later: "bg-line text-ink-soft",
   done: "bg-mint-100 text-mint-700",
@@ -85,11 +85,11 @@ export default async function VaccinesPage({ searchParams }: PageProps<"/baby/va
         <>
           <SectionTitle>확인할 접종</SectionTitle>
           {grouped.toCheck.length === 0 ? (
-            <p className="rounded-2xl bg-white/70 px-4 py-4 text-sm text-ink-soft">지금 확인할 접종이 없어요. 👍</p>
+            <p className="rounded-2xl bg-surface/70 px-4 py-4 text-sm text-ink-soft">지금 확인할 접종이 없어요. 👍</p>
           ) : (
             <>
               {checkCount >= 2 ? (
-                <div className="mb-3 rounded-2xl border border-lavender-100 bg-lavender-50 p-4 text-sm text-ink-soft">
+                <div className="mb-3 rounded-2xl border border-gold-100 bg-gold-50 p-4 text-sm text-ink-soft">
                   <p>
                     권장 시기가 지난 접종이 <strong className="text-ink">{checkCount}개</strong> 있어요. 이미 맞았다면 한 번에 기록할 수 있어요. (접종일은 권장 시작일로
                     기록되며, 나중에 실제 날짜로 고칠 수 있어요.)
@@ -103,7 +103,7 @@ export default async function VaccinesPage({ searchParams }: PageProps<"/baby/va
 
           <SectionTitle>완료 ✓</SectionTitle>
           {grouped.done.length === 0 ? (
-            <p className="rounded-2xl bg-white/70 px-4 py-4 text-sm text-ink-soft">아직 기록한 접종이 없어요.</p>
+            <p className="rounded-2xl bg-surface/70 px-4 py-4 text-sm text-ink-soft">아직 기록한 접종이 없어요.</p>
           ) : (
             <ul className="space-y-2">{grouped.done.map(renderItem)}</ul>
           )}
@@ -138,7 +138,7 @@ function VaccineItem({
   const { vaccine, status } = item;
   return (
     <li>
-      <details className="group rounded-2xl border border-line bg-white shadow-[var(--shadow-soft)]">
+      <details className="group rounded-2xl border border-line bg-surface shadow-[var(--shadow-soft)]">
         <summary className="flex min-h-16 items-center gap-3 px-4 py-3">
           <span aria-hidden className="text-xl">
             {status === "done" ? "✅" : "💉"}

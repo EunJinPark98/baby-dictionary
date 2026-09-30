@@ -73,9 +73,9 @@ export default async function PlayPage({ searchParams }: PageProps<"/play">) {
 
       {!context ? (
         <div className="mt-6">
-          <Callout emoji="⭐" tone="lavender">
+          <Callout emoji="✨" tone="lavender">
             아기 생년월일을 등록하면 월령에 맞는 놀이를 매일 골라드려요.{" "}
-            <Link href="/signup" className="font-semibold text-lavender-700 underline underline-offset-2">
+            <Link href="/signup" className="font-semibold text-gold-700 underline underline-offset-2">
               성장지도 만들기
             </Link>
           </Callout>
@@ -91,7 +91,7 @@ function CategoryChip({ href, active, label }: { href: string; active: boolean; 
       href={href}
       scroll={false}
       aria-current={active ? "page" : undefined}
-      className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full border px-4 text-sm font-semibold ${active ? "border-lavender-400 bg-lavender-100 text-lavender-700" : "border-line bg-white text-ink-soft"}`}
+      className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-full border px-4 text-sm font-semibold ${active ? "border-gold-400 bg-gold-100 text-gold-700" : "border-line bg-surface text-ink-soft"}`}
     >
       {label}
     </Link>

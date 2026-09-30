@@ -112,7 +112,7 @@ export function Fridge({ foods, recipes, month }: { foods: FridgeFood[]; recipes
   return (
     <div>
       {staples.length > 0 ? (
-        <label className="mb-4 flex min-h-14 cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-white px-4">
+        <label className="mb-4 flex min-h-14 cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-surface px-4">
           <span className="text-[15px] font-semibold text-ink">
             기본 재료({staples.map((s) => s.name).join(", ")})는 있어요
           </span>
@@ -121,7 +121,7 @@ export function Fridge({ foods, recipes, month }: { foods: FridgeFood[]; recipes
             role="switch"
             checked={assumeStaples}
             onChange={(e) => setAssumeStaples(e.target.checked)}
-            className="size-6 accent-lavender-600"
+            className="size-6 accent-gold-600"
           />
         </label>
       ) : null}
@@ -145,7 +145,7 @@ export function Fridge({ foods, recipes, month }: { foods: FridgeFood[]; recipes
                       type="button"
                       onClick={() => toggle(food.id)}
                       aria-pressed={on}
-                      className={`inline-flex min-h-11 items-center gap-1 rounded-full border px-3.5 text-[15px] font-semibold transition-colors ${on ? "border-lavender-400 bg-lavender-100 text-lavender-700" : "border-line bg-white text-ink-soft"}`}
+                      className={`inline-flex min-h-11 items-center gap-1 rounded-full border px-3.5 text-[15px] font-semibold transition-colors ${on ? "border-gold-400 bg-gold-100 text-gold-700" : "border-line bg-surface text-ink-soft"}`}
                     >
                       {food.emoji} {food.name}
                     </button>
@@ -160,9 +160,9 @@ export function Fridge({ foods, recipes, month }: { foods: FridgeFood[]; recipes
       <section aria-live="polite" className="mt-8">
         <h2 className="text-lg font-bold text-ink">오늘 만들 수 있어요</h2>
         {selected.size === 0 ? (
-          <p className="mt-2 rounded-2xl bg-white/70 px-4 py-4 text-sm text-ink-soft">재료를 고르면 만들 수 있는 이유식을 찾아드려요.</p>
+          <p className="mt-2 rounded-2xl bg-surface/70 px-4 py-4 text-sm text-ink-soft">재료를 고르면 만들 수 있는 이유식을 찾아드려요.</p>
         ) : result.ready.length === 0 ? (
-          <p className="mt-2 rounded-2xl bg-white/70 px-4 py-4 text-sm text-ink-soft">고른 재료만으로 만들 수 있는 레시피가 아직 없어요.</p>
+          <p className="mt-2 rounded-2xl bg-surface/70 px-4 py-4 text-sm text-ink-soft">고른 재료만으로 만들 수 있는 레시피가 아직 없어요.</p>
         ) : (
           <ul className="mt-2 space-y-2">
             {result.ready.map(({ recipe }) => (
@@ -203,7 +203,7 @@ function RecipeLink({ recipe, note }: { recipe: FridgeRecipe; note: string | nul
   return (
     <Link
       href={`/food/recipes/${recipe.slug}`}
-      className="flex min-h-16 items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3 shadow-[var(--shadow-soft)]"
+      className="flex min-h-16 items-center gap-3 rounded-2xl border border-line bg-surface px-4 py-3 shadow-[var(--shadow-soft)]"
     >
       <span aria-hidden className="text-2xl">
         {recipe.emoji}

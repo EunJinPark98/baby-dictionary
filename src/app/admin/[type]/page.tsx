@@ -22,7 +22,8 @@ export default async function AdminListPage({ params, searchParams }: PageProps<
     <div>
       <PageHeader
         back={{ href: "/admin", label: "콘텐츠 관리" }}
-        title={`${config.emoji} ${config.label}`}
+        icon={config.emoji}
+        title={config.label}
         action={
           <Link href={`/admin/${config.key}/new`} className={buttonClass("primary", "sm")}>
             + 새로 만들기
@@ -43,10 +44,10 @@ export default async function AdminListPage({ params, searchParams }: PageProps<
       ) : rows.length === 0 ? (
         <EmptyState title="아직 콘텐츠가 없어요" action={{ href: `/admin/${config.key}/new`, label: "첫 콘텐츠 만들기" }} />
       ) : (
-        <ul className="mt-4 divide-y divide-line overflow-hidden rounded-2xl border border-line bg-white">
+        <ul className="mt-4 divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface">
           {rows.map((row) => (
             <li key={String(row.id)}>
-              <Link href={`/admin/${config.key}/${String(row.id)}`} className="flex min-h-14 items-center justify-between gap-3 px-4 py-2.5 hover:bg-lavender-50">
+              <Link href={`/admin/${config.key}/${String(row.id)}`} className="flex min-h-14 items-center justify-between gap-3 px-4 py-2.5 hover:bg-gold-50">
                 <span className="min-w-0">
                   <span className="block truncate font-semibold text-ink">
                     {typeof row.emoji === "string" ? `${row.emoji} ` : ""}

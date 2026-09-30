@@ -105,7 +105,7 @@ function WeekLink({ week, label, disabled }: { week: number; label: string; disa
     );
   }
   return (
-    <Link href={`/week?w=${week}`} className={`${className} border-line bg-white text-lavender-700 hover:bg-lavender-50`}>
+    <Link href={`/week?w=${week}`} className={`${className} border-line bg-surface text-gold-700 hover:bg-gold-50`}>
       {label}
     </Link>
   );

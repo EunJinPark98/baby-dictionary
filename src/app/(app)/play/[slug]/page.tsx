@@ -38,11 +38,8 @@ export default async function ActivityDetailPage({ params }: PageProps<"/play/[s
     <article>
       <PageHeader
         back={{ href: "/play", label: "놀이" }}
-        title={
-          <span>
-            <span aria-hidden>{activity.emoji}</span> {activity.title}
-          </span>
-        }
+        icon={activity.emoji}
+        title={`${activity.title}`}
         description={activity.description}
         action={<FavoriteButton contentType="activity" contentId={activity.id} loginNext={`/play/${activity.slug}`} />}
       />
@@ -51,17 +48,17 @@ export default async function ActivityDetailPage({ params }: PageProps<"/play/[s
       <dl className="mt-4 grid grid-cols-2 gap-3">
         <InfoTile label="추천 시기" value={formatMonthRange(activity.min_month, activity.max_month)} />
         <InfoTile label="예상 시간" value={activity.duration_minutes ? `${activity.duration_minutes}분` : "자유롭게"} />
-        <div className="col-span-2 rounded-2xl border border-line bg-white px-4 py-3">
+        <div className="col-span-2 rounded-2xl border border-line bg-surface px-4 py-3">
           <dt className="text-[13px] font-semibold text-ink-faint">발달 영역</dt>
           <dd className="mt-1 flex flex-wrap gap-1.5">
             {activity.categories.map((category) => (
-              <span key={category} className="rounded-full bg-lavender-50 px-2.5 py-1 text-sm font-semibold text-lavender-700">
+              <span key={category} className="rounded-full bg-gold-50 px-2.5 py-1 text-sm font-semibold text-gold-700">
                 {ACTIVITY_CATEGORIES[category].emoji} {ACTIVITY_CATEGORIES[category].label}
               </span>
             ))}
           </dd>
         </div>
-        <div className="col-span-2 rounded-2xl border border-line bg-white px-4 py-3">
+        <div className="col-span-2 rounded-2xl border border-line bg-surface px-4 py-3">
           <dt className="text-[13px] font-semibold text-ink-faint">준비물</dt>
           <dd className="mt-0.5 text-[16px] font-semibold text-ink">{activity.materials || "없음"}</dd>
         </div>
@@ -74,7 +71,7 @@ export default async function ActivityDetailPage({ params }: PageProps<"/play/[s
             <ol className="space-y-3">
               {activity.steps.map((step, index) => (
                 <li key={step} className="flex gap-3 text-[16px] leading-relaxed text-ink">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-lavender-100 text-sm font-bold text-lavender-700">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gold-100 text-sm font-bold text-gold-700">
                     {index + 1}
                   </span>
                   <span className="pt-0.5">{step}</span>
@@ -108,7 +105,7 @@ export default async function ActivityDetailPage({ params }: PageProps<"/play/[s
 
 function InfoTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-line bg-white px-4 py-3">
+    <div className="rounded-2xl border border-line bg-surface px-4 py-3">
       <dt className="text-[13px] font-semibold text-ink-faint">{label}</dt>
       <dd className="mt-0.5 text-[16px] font-bold text-ink">{value}</dd>
     </div>

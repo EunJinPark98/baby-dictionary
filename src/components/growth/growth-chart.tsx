@@ -52,7 +52,7 @@ export function GrowthChart({ points, unit, label }: { points: GrowthPoint[]; un
         </text>
 
         {points.length > 1 ? (
-          <path d={path} fill="none" stroke="var(--color-lavender-600)" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+          <path d={path} fill="none" stroke="var(--color-gold-500)" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
         ) : null}
 
         {points.map((p) => {
@@ -64,14 +64,14 @@ export function GrowthChart({ points, unit, label }: { points: GrowthPoint[]; un
             <g key={p.date} className="group outline-none" tabIndex={0} aria-label={`${formatDotDate(p.date)} ${p.value}${unit}`}>
               {/* 마크보다 큰 투명 히트 영역 */}
               <circle cx={cx} cy={cy} r={14} fill="transparent" />
-              <circle cx={cx} cy={cy} r={4.5} fill="var(--color-lavender-600)" stroke="#fff" strokeWidth={2} />
+              <circle cx={cx} cy={cy} r={4.5} fill="var(--color-gold-500)" stroke="var(--color-night)" strokeWidth={2} />
               <g className="pointer-events-none opacity-0 transition-opacity group-hover:opacity-100 group-focus:opacity-100">
-                <rect x={tipX - 42} y={tipAbove ? cy - 46 : cy + 12} width={84} height={34} rx={8} fill="var(--color-ink)" />
-                <text x={tipX} y={tipAbove ? cy - 32 : cy + 26} textAnchor="middle" fontSize={11} fontWeight={700} fill="#fff">
+                <rect x={tipX - 42} y={tipAbove ? cy - 46 : cy + 12} width={84} height={34} rx={8} fill="var(--color-surface-2)" stroke="rgb(245 197 66 / 0.35)" />
+                <text x={tipX} y={tipAbove ? cy - 32 : cy + 26} textAnchor="middle" fontSize={11} fontWeight={700} fill="var(--color-gold-700)">
                   {p.value}
                   {unit}
                 </text>
-                <text x={tipX} y={tipAbove ? cy - 19 : cy + 39} textAnchor="middle" fontSize={9} fill="#e6e3ee">
+                <text x={tipX} y={tipAbove ? cy - 19 : cy + 39} textAnchor="middle" fontSize={9} fill="var(--color-ink-faint)">
                   {formatDotDate(p.date)}
                 </text>
               </g>

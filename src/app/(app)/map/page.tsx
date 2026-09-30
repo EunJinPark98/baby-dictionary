@@ -53,7 +53,7 @@ export default async function MapPage() {
 
       <Card tone="star" className="mb-6 flex items-center justify-between gap-3">
         <p className="text-[15px] font-semibold text-ink">
-          ⭐ 지금까지 <strong className="text-lavender-700">{discoveredCount}개</strong>의 별을 발견했어요
+          ✦ 지금까지 <strong className="text-gold-700">{discoveredCount}개</strong>의 별을 발견했어요
         </p>
         <Link href="/baby/milestones" className={buttonClass("secondary", "sm", "shrink-0")}>
           기록하기

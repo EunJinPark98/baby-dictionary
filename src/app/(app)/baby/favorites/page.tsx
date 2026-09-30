@@ -38,7 +38,7 @@ export default async function FavoritesPage() {
             <ul className="space-y-2">
               {group.items.map((item) => (
                 <li key={item.id}>
-                  <Link href={item.href} className="flex min-h-14 items-center justify-between rounded-2xl border border-line bg-white px-4 font-semibold text-ink">
+                  <Link href={item.href} className="flex min-h-14 items-center justify-between rounded-2xl border border-line bg-surface px-4 font-semibold text-ink">
                     {item.label}
                     <span aria-hidden className="text-ink-faint">
                       ›

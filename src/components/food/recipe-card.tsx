@@ -17,7 +17,7 @@ export function RecipeCard({ recipe, note }: { recipe: RecipeWithIngredients; no
         <span className="mt-1 block truncate text-[13px] text-ink-faint">
           {recipe.ingredients.map((i) => `${i.food?.emoji ?? ""}${i.food?.name ?? ""}`).join(" · ")}
         </span>
-        {note ? <span className="mt-1.5 block text-[13px] font-semibold text-lavender-700">{note}</span> : null}
+        {note ? <span className="mt-1.5 block text-[13px] font-semibold text-gold-700">{note}</span> : null}
       </span>
     </LinkCard>
   );

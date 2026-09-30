@@ -1,7 +1,17 @@
 import type { Metadata, Viewport } from "next";
+import { Gowun_Batang } from "next/font/google";
 import { getSiteUrl } from "@/lib/env";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/seo";
 import "./globals.css";
+
+/** 별마마파파 브랜드 제목 서체 (별별 작명소와 동일) */
+const gowunBatang = Gowun_Batang({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-gowun-batang",
+  preload: false,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -23,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fffcf5",
+  themeColor: "#05060c",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -31,7 +41,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className="h-full antialiased">
+    <html lang="ko" className={`${gowunBatang.variable} h-full antialiased`}>
       <body className="min-h-full">{children}</body>
     </html>
   );

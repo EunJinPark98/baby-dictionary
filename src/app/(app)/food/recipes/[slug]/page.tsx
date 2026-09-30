@@ -63,11 +63,8 @@ export default async function RecipeDetailPage({ params }: PageProps<"/food/reci
       />
       <PageHeader
         back={{ href: "/food/recipes", label: "레시피" }}
-        title={
-          <span>
-            <span aria-hidden>{recipe.emoji}</span> {recipe.title}
-          </span>
-        }
+        icon={recipe.emoji}
+        title={`${recipe.title}`}
         description={recipe.description}
         action={<FavoriteButton contentType="recipe" contentId={recipe.id} loginNext={`/food/recipes/${recipe.slug}`} />}
       />
@@ -78,11 +75,11 @@ export default async function RecipeDetailPage({ params }: PageProps<"/food/reci
       </div>
 
       <dl className="mt-4 grid grid-cols-2 gap-3">
-        <div className="rounded-2xl border border-line bg-white px-4 py-3">
+        <div className="rounded-2xl border border-line bg-surface px-4 py-3">
           <dt className="text-[13px] font-semibold text-ink-faint">분량</dt>
           <dd className="mt-0.5 font-bold text-ink">{recipe.servings || "-"}</dd>
         </div>
-        <div className="rounded-2xl border border-line bg-white px-4 py-3">
+        <div className="rounded-2xl border border-line bg-surface px-4 py-3">
           <dt className="text-[13px] font-semibold text-ink-faint">질감</dt>
           <dd className="mt-0.5 font-bold text-ink">{recipe.texture || "-"}</dd>
         </div>
@@ -94,7 +91,7 @@ export default async function RecipeDetailPage({ params }: PageProps<"/food/reci
           {recipe.ingredients.map((ingredient) => (
             <li key={ingredient.food_id} className="flex min-h-12 items-center justify-between gap-3 py-2">
               {ingredient.food ? (
-                <Link href={`/food/ingredients/${ingredient.food.slug}`} className="font-semibold text-ink underline decoration-lavender-200 underline-offset-4">
+                <Link href={`/food/ingredients/${ingredient.food.slug}`} className="font-semibold text-ink underline decoration-gold-200 underline-offset-4">
                   {ingredient.food.emoji} {ingredient.food.name}
                   {ingredient.is_optional ? <span className="ml-1 text-[13px] font-normal text-ink-faint">(선택)</span> : null}
                 </Link>

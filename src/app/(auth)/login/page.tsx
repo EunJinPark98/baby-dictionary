@@ -22,7 +22,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold text-ink">다시 만나서 반가워요 ⭐</h1>
+      <h1 className="text-gold-gradient text-[28px] font-bold leading-snug">다시 만나서 반가워요</h1>
       <p className="mt-1.5 text-ink-soft">로그인하고 오늘 우리 아기에게 필요한 것을 확인해 보세요.</p>
       <Card className="mt-6 space-y-4">
         {errorKey && ERROR_MESSAGES[errorKey] ? (

@@ -1,70 +1,153 @@
 @import "tailwindcss";
 
 /*
- * 아기별 지도 디자인 토큰
- * 따뜻한 아이보리 배경 + 연보라(주색) + 별빛 노랑 + 아주 연한 핑크/블루 포인트
+ * 아기별 지도 디자인 토큰 — 별마마파파 브랜드 "밤하늘 · 금빛 무드"
+ * (byeolmamapapa.com, 별별 작명소와 같은 팔레트)
+ *
+ * 토큰 이름은 역할 기준이다. 어두운 배경 위에서 숫자가 클수록 더 밝고 선명해진다.
+ *  - night / surface / surface-2 : 배경 → 카드 → 입력칸
+ *  - ink / ink-soft / ink-faint   : 본문 → 보조 → 흐린 글자
+ *  - gold-*                       : 브랜드 금빛 (50~300 은 어두운 틴트/테두리, 400~700 은 강조)
+ *  - star / blush / sky / mint    : 하이라이트 / 주의 / 안내 / 완료
  */
 @theme {
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Noto Sans KR", "Malgun Gothic", "Segoe UI", sans-serif;
+  --font-brand: var(--font-gowun-batang), "Gowun Batang", "Apple SD Gothic Neo", serif;
 
-  --color-ivory: #fffcf5;
-  --color-cream: #fff6e5;
-  --color-line: #ece6f4;
-  --color-ink: #2e2a3a;
-  --color-ink-soft: #5f5a70;
-  --color-ink-faint: #8a8599;
+  --color-night: #05060c;
+  --color-cream: #0a0c16;
+  --color-surface: #0d1020;
+  --color-surface-2: #121628;
+  --color-line: #1f2335;
+  --color-ink: #f6f6f8;
+  --color-ink-soft: #b3b8c5;
+  --color-ink-faint: #8a90a0;
 
-  --color-lavender-50: #f6f3ff;
-  --color-lavender-100: #ece6ff;
-  --color-lavender-200: #dcd2ff;
-  --color-lavender-300: #c0b1fb;
-  --color-lavender-400: #a18ef2;
-  --color-lavender-500: #8671e4;
-  --color-lavender-600: #6e58cf;
-  --color-lavender-700: #5944ad;
+  --color-gold-50: #14120c;
+  --color-gold-100: #221d0f;
+  --color-gold-200: #3a3014;
+  --color-gold-300: #6e5719;
+  --color-gold-400: #d9a215;
+  --color-gold-500: #f5c542;
+  --color-gold-600: #f5c542;
+  --color-gold-700: #ffe9a8;
 
-  --color-star-50: #fffaeb;
-  --color-star-100: #fff2cc;
-  --color-star-200: #ffe499;
-  --color-star-300: #ffd566;
-  --color-star-400: #ffc53d;
-  --color-star-500: #f0ad0e;
-  --color-star-700: #8a5a00;
+  --color-star-50: #16130b;
+  --color-star-100: #2a2210;
+  --color-star-200: #4a3b14;
+  --color-star-300: #f5c542;
+  --color-star-400: #f5c542;
+  --color-star-500: #d9a215;
+  --color-star-700: #ffd97a;
 
-  --color-blush-50: #fff4f7;
-  --color-blush-100: #fde7ee;
-  --color-blush-500: #d9587f;
-  --color-sky-50: #f2f8fe;
-  --color-sky-100: #e3f0fc;
-  --color-sky-600: #2f73b5;
-  --color-mint-100: #e3f6ec;
-  --color-mint-700: #237a4b;
+  --color-blush-50: #1b0f15;
+  --color-blush-100: #3a1a26;
+  --color-blush-500: #ff9db8;
+  --color-sky-50: #0c1422;
+  --color-sky-100: #172840;
+  --color-sky-600: #a3cbff;
+  --color-mint-100: #10291e;
+  --color-mint-700: #8be3b2;
 
-  --radius-card: 1.5rem;
-  --shadow-soft: 0 1px 2px rgb(46 42 58 / 0.04), 0 6px 20px -8px rgb(110 88 207 / 0.18);
+  --radius-card: 1.25rem;
+  --shadow-soft: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 18px 40px -24px rgb(0 0 0 / 0.8);
+  --shadow-gold: 0 10px 30px rgb(245 197 66 / 0.24);
+}
+
+/* 브랜드 카드: 금빛 잔광이 비치는 반투명 밤하늘 카드 */
+@utility card-night {
+  background:
+    linear-gradient(160deg, rgb(245 197 66 / 0.07), rgb(255 255 255 / 0.015) 45%),
+    rgb(13 16 32 / 0.82);
+  border-color: rgb(245 197 66 / 0.16);
+}
+
+/* 금빛 그라데이션 글자 */
+@utility text-gold-gradient {
+  background: linear-gradient(180deg, #ffe9a8, #d9a215);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 금빛 그라데이션 버튼 */
+@utility bg-gold-gradient {
+  background: linear-gradient(135deg, #ffe9a8, #f5c542 55%, #d9a215);
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+  background: var(--color-night);
 }
 
+/* 배경색은 html 이 칠하고 body 는 투명하게 둔다 (아래 고정 별하늘 레이어가 보이도록) */
 body {
-  background: var(--color-ivory);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  line-height: 1.6;
   word-break: keep-all;
   overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 밤하늘: 흩뿌린 별 + 위쪽 금빛 잔광 (고정 배경, 콘텐츠와 상호작용 없음) */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+body::before {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.7), transparent 60%),
+    radial-gradient(1px 1px at 78% 12%, rgb(255 255 255 / 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 44% 32%, rgb(255 233 168 / 0.8), transparent 60%),
+    radial-gradient(1px 1px at 91% 44%, rgb(255 255 255 / 0.5), transparent 60%),
+    radial-gradient(1px 1px at 23% 61%, rgb(255 255 255 / 0.45), transparent 60%),
+    radial-gradient(1.5px 1.5px at 66% 71%, rgb(255 233 168 / 0.6), transparent 60%),
+    radial-gradient(1px 1px at 8% 86%, rgb(255 255 255 / 0.5), transparent 60%),
+    radial-gradient(1px 1px at 52% 92%, rgb(255 255 255 / 0.4), transparent 60%),
+    radial-gradient(1px 1px at 35% 8%, rgb(255 255 255 / 0.5), transparent 60%),
+    radial-gradient(1px 1px at 85% 83%, rgb(255 255 255 / 0.45), transparent 60%);
+  background-size: 420px 520px;
+  animation: sky-twinkle 6s ease-in-out infinite;
+}
+body::after {
+  background: radial-gradient(60% 45% at 50% -8%, rgb(245 197 66 / 0.13), rgb(245 197 66 / 0.03) 55%, transparent 75%);
+}
+
+@keyframes sky-twinkle {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+h1,
+h2 {
+  font-family: var(--font-brand);
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgb(245 197 66 / 0.35);
+  color: #fff;
 }
 
 /* 하단 고정 네비게이션 높이 + iOS 홈 인디케이터 영역 */
 .pb-nav {
-  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
 }
 
 .safe-bottom {
@@ -72,9 +155,15 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-lavender-400);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 3px;
   border-radius: 0.75rem;
+}
+
+/* 날짜 입력의 달력 아이콘을 어두운 배경에서도 보이게 */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.85) sepia(0.4) saturate(3) hue-rotate(5deg);
+  cursor: pointer;
 }
 
 /* details/summary 기본 마커 제거 (성장지도 등 펼침 카드) */
@@ -91,6 +180,7 @@ summary::-webkit-details-marker {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
@@ -103,10 +193,24 @@ summary::-webkit-details-marker {
   }
   50% {
     transform: scale(1.12);
-    opacity: 0.85;
+    opacity: 0.8;
   }
 }
 
 .animate-twinkle {
-  animation: twinkle 2.4s ease-in-out infinite;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite;
 }

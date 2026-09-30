@@ -120,7 +120,7 @@ export async function saveFoodRecord(
   if (error) return actionError("저장하지 못했어요. 잠시 후 다시 시도해 주세요.");
 
   revalidatePath("/food", "layout");
-  return actionOk("⭐ 새로운 맛을 기록했어요!");
+  return actionOk("✦ 새로운 맛을 기록했어요!");
 }
 
 // ---------------------------------------------------------------------------
@@ -240,7 +240,7 @@ export async function addMilestone(babyId: string, _prev: ActionState, formData:
 
   revalidatePath("/baby/milestones");
   revalidatePath("/map");
-  return actionOk("⭐ 새로운 별을 발견했어요!");
+  return actionOk("✦ 새로운 별을 발견했어요!");
 }
 
 export async function deleteMilestone(milestoneId: string): Promise<void> {

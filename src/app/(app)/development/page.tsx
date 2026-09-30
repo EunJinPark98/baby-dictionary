@@ -77,7 +77,7 @@ export default async function DevelopmentPage({ searchParams }: PageProps<"/deve
           <SectionTitle>곧 관찰될 수도 있는 모습</SectionTitle>
           <ul className="space-y-2">
             {upcoming.map((item) => (
-              <li key={item.id} className="flex items-center gap-2 rounded-2xl bg-white/70 px-4 py-3 text-sm text-ink-soft">
+              <li key={item.id} className="flex items-center gap-2 rounded-2xl bg-surface/70 px-4 py-3 text-sm text-ink-soft">
                 <span aria-hidden>{DEVELOPMENT_DOMAINS[item.domain].emoji}</span>
                 <span className="font-medium text-ink">{item.title}</span>
                 <span className="ml-auto shrink-0 text-xs">{item.min_month}개월~</span>
@@ -88,7 +88,7 @@ export default async function DevelopmentPage({ searchParams }: PageProps<"/deve
       ) : null}
 
       <p className="mt-6 text-center text-sm">
-        <Link href={`/guide/${month}-month-development`} className="inline-flex min-h-11 items-center font-semibold text-lavender-700">
+        <Link href={`/guide/${month}-month-development`} className="inline-flex min-h-11 items-center font-semibold text-gold-700">
           {month}개월 성장 가이드 전체 보기 ›
         </Link>
       </p>

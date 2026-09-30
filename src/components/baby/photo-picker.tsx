@@ -92,7 +92,7 @@ export function PhotoPicker({
       </span>
       <input type="hidden" name={name} value={path ?? ""} />
       <div className="flex items-center gap-4">
-        <div className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-3xl border border-line bg-lavender-50 text-3xl">
+        <div className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-3xl border border-line bg-gold-50 text-3xl">
           {preview ? (
             // eslint-disable-next-line @next/next/no-img-element -- 비공개 signed URL/blob 미리보기라 next/image 최적화 대상이 아님
             <img src={preview} alt="선택한 사진 미리보기" className="size-full object-cover" />
@@ -103,12 +103,12 @@ export function PhotoPicker({
         <div className="flex flex-wrap gap-2">
           <label
             htmlFor={inputId}
-            className="inline-flex min-h-11 cursor-pointer items-center rounded-2xl border border-lavender-200 bg-white px-4 text-sm font-semibold text-lavender-700 hover:bg-lavender-50"
+            className="inline-flex min-h-11 cursor-pointer items-center rounded-2xl border border-gold-200 bg-surface px-4 text-sm font-semibold text-gold-700 hover:bg-gold-50"
           >
             {uploading ? "올리는 중…" : preview ? "사진 바꾸기" : "사진 선택"}
           </label>
           {preview && !uploading ? (
-            <button type="button" onClick={handleRemove} className="min-h-11 rounded-2xl px-3 text-sm font-medium text-ink-soft hover:bg-lavender-50">
+            <button type="button" onClick={handleRemove} className="min-h-11 rounded-2xl px-3 text-sm font-medium text-ink-soft hover:bg-gold-50">
               삭제
             </button>
           ) : null}

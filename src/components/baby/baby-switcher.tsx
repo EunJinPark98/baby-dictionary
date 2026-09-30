@@ -15,9 +15,9 @@ export function BabySwitcher({ babies, selectedId }: { babies: BabyRow[]; select
                 <button
                   type="submit"
                   aria-pressed={selected}
-                  className={`min-h-11 whitespace-nowrap rounded-full border px-4 text-sm font-semibold ${selected ? "border-lavender-400 bg-lavender-100 text-lavender-700" : "border-line bg-white text-ink-soft"}`}
+                  className={`min-h-11 whitespace-nowrap rounded-full border px-4 text-sm font-semibold ${selected ? "border-gold-400 bg-gold-100 text-gold-700" : "border-line bg-surface text-ink-soft"}`}
                 >
-                  ⭐ {baby.name}
+                  ✦ {baby.name}
                 </button>
               </form>
             </li>

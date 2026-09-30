@@ -50,11 +50,8 @@ export default async function IngredientDetailPage({ params }: PageProps<"/food/
     <article>
       <PageHeader
         back={{ href: "/food/ingredients", label: "재료 도감" }}
-        title={
-          <span>
-            <span aria-hidden>{food.emoji}</span> {food.name}
-          </span>
-        }
+        icon={food.emoji}
+        title={`${food.name}`}
         description={food.description}
         action={<FavoriteButton contentType="food" contentId={food.id} loginNext={`/food/ingredients/${food.slug}`} />}
       />
@@ -89,7 +86,7 @@ export default async function IngredientDetailPage({ params }: PageProps<"/food/
               <li key={pair.id}>
                 <Link
                   href={`/food/ingredients/${pair.slug}`}
-                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-ink"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line bg-surface px-4 text-[15px] font-semibold text-ink"
                 >
                   {pair.emoji} {pair.name}
                 </Link>
@@ -101,7 +98,7 @@ export default async function IngredientDetailPage({ params }: PageProps<"/food/
 
       <SectionTitle>관련 레시피</SectionTitle>
       {recipes.length === 0 ? (
-        <p className="rounded-2xl bg-white/70 px-4 py-3 text-sm text-ink-soft">아직 등록된 레시피가 없어요.</p>
+        <p className="rounded-2xl bg-surface/70 px-4 py-3 text-sm text-ink-soft">아직 등록된 레시피가 없어요.</p>
       ) : (
         <ul className="grid gap-3 sm:grid-cols-2">
           {recipes.map((recipe) => (

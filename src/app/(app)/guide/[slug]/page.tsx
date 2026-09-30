@@ -126,7 +126,7 @@ export default async function MonthGuidePage({ params }: PageProps<"/guide/[slug
           <SectionTitle>⚠️ 안전</SectionTitle>
           <ul className="space-y-2">
             {safety.map((guide) => (
-              <li key={guide.id} className="rounded-2xl border border-line bg-white px-4 py-3">
+              <li key={guide.id} className="rounded-2xl border border-line bg-surface px-4 py-3">
                 <p className="font-semibold text-ink">
                   {guide.emoji} {guide.title}
                 </p>

@@ -21,8 +21,8 @@ export default function GuideIndexPage() {
         {guideMonths().map((month) => (
           <li key={month}>
             <LinkCard href={`/guide/${guideSlug(month)}`} tone={month === 12 ? "star" : "white"} className="text-center">
-              <span className="block text-2xl" aria-hidden>
-                {month === 0 ? "🌱" : month === 12 ? "🎂" : "⭐"}
+              <span className="block text-2xl text-gold-500" aria-hidden>
+                {month === 0 ? "🌱" : month === 12 ? "🎂" : "✦"}
               </span>
               <span className="mt-1 block text-lg font-extrabold text-ink">{month}개월</span>
               <span className="text-[13px] text-ink-soft">{month === 0 ? "신생아" : month === 12 ? "첫돌" : "성장 가이드"}</span>

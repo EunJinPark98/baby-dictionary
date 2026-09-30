@@ -19,7 +19,7 @@ export default async function OnboardingPage({ searchParams }: PageProps<"/onboa
   if (babies.length > 0 && !isAdding) redirect("/today");
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-lavender-50 via-ivory to-ivory">
+    <div className="min-h-dvh">
       <header className="mx-auto flex h-14 max-w-md items-center justify-between px-4">
         <Logo href={babies.length > 0 ? "/today" : "/"} />
         {isAdding ? (
@@ -30,15 +30,15 @@ export default async function OnboardingPage({ searchParams }: PageProps<"/onboa
       </header>
       <main className="mx-auto max-w-md px-4 pb-16 pt-2">
         <div className="flex items-center gap-2">
-          <Star className="size-8 animate-twinkle" />
-          <p className="text-sm font-semibold text-lavender-600">{isAdding ? "새로운 작은 별" : "첫 번째 단계"}</p>
+          <Star className="size-8 animate-twinkle" glow />
+          <p className="text-[13px] font-bold tracking-[0.08em] text-gold-400">{isAdding ? "새로운 작은 별" : "첫 번째 단계"}</p>
         </div>
-        <h1 className="mt-2 text-2xl font-extrabold leading-snug text-ink">
+        <h1 className="text-gold-gradient mt-2 text-[28px] font-bold leading-snug">
           우리 아기를 소개해 주세요
         </h1>
         <p className="mt-1.5 text-ink-soft">생년월일만 알면 오늘 필요한 발달·이유식·놀이·접종 정보를 자동으로 보여드려요.</p>
         <Card className="mt-6">
-          <BabyForm action={createBaby} userId={user.id} today={todayIsoDate()} submitLabel="성장지도 시작하기 ⭐" />
+          <BabyForm action={createBaby} userId={user.id} today={todayIsoDate()} submitLabel="✦ 성장지도 시작하기" />
         </Card>
         <p className="mt-4 text-center text-[13px] text-ink-faint">꼭 필요한 정보만 저장하며, 기록은 나만 볼 수 있어요.</p>
       </main>

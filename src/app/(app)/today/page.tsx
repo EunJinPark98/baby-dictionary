@@ -86,7 +86,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
 
       {params.welcome === "1" ? (
         <div className="mb-4">
-          <Callout emoji="⭐" tone="lavender">
+          <Callout emoji="✨" tone="lavender">
             <strong>새로운 별을 발견했어요!</strong> {withTopic(baby.name)} 오늘부터 아기별 지도와 함께 성장 여행을 떠나요.
           </Callout>
         </div>
@@ -178,7 +178,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
         <>
           <SectionTitle
             action={
-              <Link href="/week" className="min-h-11 content-center text-sm font-semibold text-lavender-700">
+              <Link href="/week" className="min-h-11 content-center text-sm font-semibold text-gold-700">
                 전체 보기 ›
               </Link>
             }
@@ -196,7 +196,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
 
       <SectionTitle
         action={
-          <Link href="/map" className="min-h-11 content-center text-sm font-semibold text-lavender-700">
+          <Link href="/map" className="min-h-11 content-center text-sm font-semibold text-gold-700">
             성장지도 ›
           </Link>
         }
@@ -218,7 +218,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
         ) : null}
         <div className="flex flex-wrap gap-2">
           <Link href="/map" className={buttonClass("primary", "sm")}>
-            ⭐ 성장지도 보기
+            ✦ 성장지도 보기
           </Link>
           <Link href={`/guide/${Math.min(month, 12)}-month-development`} className={buttonClass("secondary", "sm")}>
             {Math.min(month, 12)}개월 가이드

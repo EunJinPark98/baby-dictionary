@@ -3,7 +3,7 @@
 export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <html lang="ko">
-      <body style={{ fontFamily: "sans-serif", background: "#fffcf5", color: "#2e2a3a", textAlign: "center", padding: "4rem 1.5rem" }}>
+      <body style={{ fontFamily: "sans-serif", background: "#05060c", color: "#f6f6f8", textAlign: "center", padding: "4rem 1.5rem" }}>
         <p style={{ fontSize: "3rem" }} aria-hidden>
           🌧️
         </p>
@@ -12,7 +12,7 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
         <button
           type="button"
           onClick={reset}
-          style={{ marginTop: "1.5rem", minHeight: 48, padding: "0 1.5rem", borderRadius: 16, border: 0, background: "#6e58cf", color: "#fff", fontWeight: 700 }}
+          style={{ marginTop: "1.5rem", minHeight: 48, padding: "0 1.5rem", borderRadius: 999, border: 0, background: "linear-gradient(135deg,#ffe9a8,#f5c542 55%,#d9a215)", color: "#14100a", fontWeight: 700 }}
         >
           다시 시도
         </button>

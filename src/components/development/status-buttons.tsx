@@ -6,9 +6,9 @@ import { DEVELOPMENT_STATUSES, DEVELOPMENT_STATUS_ORDER } from "@/lib/labels";
 import type { DevelopmentStatus } from "@/lib/supabase/database.types";
 
 const selectedStyles: Record<DevelopmentStatus, string> = {
-  doing: "border-star-400 bg-star-100 text-ink",
-  not_yet: "border-lavender-300 bg-lavender-50 text-lavender-700",
-  unsure: "border-sky-100 bg-sky-50 text-sky-600",
+  doing: "border-transparent bg-gold-gradient text-[#14100a] shadow-[var(--shadow-gold)]",
+  not_yet: "border-gold-500/40 bg-gold-500/10 text-gold-700",
+  unsure: "border-sky-600/40 bg-sky-50 text-sky-600",
 };
 
 /**
@@ -47,7 +47,7 @@ export function DevelopmentStatusButtons({
             type="button"
             onClick={() => choose(key)}
             aria-pressed={selected}
-            className={`flex min-h-12 flex-col items-center justify-center rounded-2xl border px-1 py-1.5 text-[13px] font-semibold leading-tight transition-colors ${selected ? selectedStyles[key] : "border-line bg-white text-ink-soft hover:bg-lavender-50"}`}
+            className={`flex min-h-12 flex-col items-center justify-center rounded-2xl border px-1 py-1.5 text-[13px] font-semibold leading-tight transition-colors ${selected ? selectedStyles[key] : "border-line bg-surface-2 text-ink-soft hover:border-gold-500/30"}`}
           >
             <span aria-hidden>{DEVELOPMENT_STATUSES[key].emoji}</span>
             {DEVELOPMENT_STATUSES[key].label}

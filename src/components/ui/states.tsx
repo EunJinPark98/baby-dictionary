@@ -12,7 +12,7 @@ interface EmptyStateProps {
 
 export function EmptyState({ emoji = "🌙", title, description, action, children }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center rounded-[var(--radius-card)] border border-dashed border-lavender-200 bg-white/60 px-6 py-10 text-center">
+    <div className="flex flex-col items-center rounded-[var(--radius-card)] border border-dashed border-gold-500/25 bg-surface/50 px-6 py-10 text-center">
       <span className="text-4xl" aria-hidden>
         {emoji}
       </span>
@@ -30,7 +30,7 @@ export function EmptyState({ emoji = "🌙", title, description, action, childre
 
 export function ErrorState({ title = "문제가 생겼어요", description, children }: { title?: string; description?: ReactNode; children?: ReactNode }) {
   return (
-    <div role="alert" className="flex flex-col items-center rounded-[var(--radius-card)] border border-blush-100 bg-blush-50 px-6 py-10 text-center">
+    <div role="alert" className="flex flex-col items-center rounded-[var(--radius-card)] border border-blush-500/25 bg-blush-50 px-6 py-10 text-center">
       <span className="text-4xl" aria-hidden>
         🌧️
       </span>
@@ -42,7 +42,7 @@ export function ErrorState({ title = "문제가 생겼어요", description, chil
 }
 
 export function Skeleton({ className = "" }: { className?: string }) {
-  return <div className={`animate-pulse rounded-2xl bg-lavender-100/70 ${className}`} aria-hidden />;
+  return <div className={`animate-pulse rounded-2xl bg-surface-2 ${className}`} aria-hidden />;
 }
 
 /** 페이지 로딩 스켈레톤 (loading.tsx 공용) */
@@ -51,7 +51,7 @@ export function PageSkeleton() {
     <div className="space-y-4" role="status" aria-live="polite">
       <span className="sr-only">불러오는 중…</span>
       <Skeleton className="h-8 w-40" />
-      <Skeleton className="h-36 w-full" />
+      <Skeleton className="h-40 w-full" />
       <div className="grid grid-cols-2 gap-3">
         <Skeleton className="h-28" />
         <Skeleton className="h-28" />

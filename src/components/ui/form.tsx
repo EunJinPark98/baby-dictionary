@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 export const inputClass =
-  "block w-full min-h-12 rounded-2xl border border-line bg-white px-4 text-base text-ink placeholder:text-ink-faint focus:border-lavender-400 focus:outline-none focus:ring-4 focus:ring-lavender-100 aria-invalid:border-blush-500";
+  "block w-full min-h-12 rounded-2xl border border-line bg-surface-2 px-4 text-base text-ink placeholder:text-ink-faint/70 transition-colors focus:border-gold-500/60 focus:outline-none focus:ring-4 focus:ring-gold-500/10 aria-invalid:border-blush-500";
 
 interface FieldProps {
   label: ReactNode;
@@ -48,7 +48,7 @@ export function FormMessage({ state }: { state: { ok: boolean; message: string }
   return (
     <p
       role={state.ok ? "status" : "alert"}
-      className={`rounded-2xl px-4 py-3 text-sm font-medium ${state.ok ? "bg-mint-100 text-mint-700" : "bg-blush-50 text-blush-500"}`}
+      className={`rounded-2xl px-4 py-3 text-sm font-medium ${state.ok ? "border border-mint-700/25 bg-mint-100 text-mint-700" : "border border-blush-500/25 bg-blush-50 text-blush-500"}`}
     >
       {state.message}
     </p>
@@ -85,7 +85,7 @@ export function ChoiceChips<T extends string>({
               required={required}
               className="peer sr-only"
             />
-            <span className="inline-flex min-h-12 items-center gap-1.5 rounded-2xl border border-line bg-white px-4 text-[15px] font-medium text-ink-soft transition-colors peer-checked:border-lavender-400 peer-checked:bg-lavender-50 peer-checked:text-lavender-700 peer-focus-visible:ring-4 peer-focus-visible:ring-lavender-100">
+            <span className="inline-flex min-h-12 items-center gap-1.5 rounded-2xl border border-line bg-surface-2 px-4 text-[15px] font-medium text-ink-soft transition-colors peer-checked:border-gold-500/60 peer-checked:bg-gold-100 peer-checked:text-gold-700 peer-checked:shadow-[0_0_20px_rgb(245_197_66/0.12)] peer-focus-visible:ring-4 peer-focus-visible:ring-gold-500/20">
               {option.emoji ? <span aria-hidden>{option.emoji}</span> : null}
               {option.label}
             </span>

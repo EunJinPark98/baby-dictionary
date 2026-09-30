@@ -3,12 +3,12 @@ import type { ReactNode } from "react";
 type BadgeTone = "lavender" | "star" | "blush" | "sky" | "mint" | "gray";
 
 const tones: Record<BadgeTone, string> = {
-  lavender: "bg-lavender-100 text-lavender-700",
-  star: "bg-star-100 text-star-700",
-  blush: "bg-blush-100 text-blush-500",
-  sky: "bg-sky-100 text-sky-600",
-  mint: "bg-mint-100 text-mint-700",
-  gray: "bg-line text-ink-soft",
+  lavender: "border border-gold-500/25 bg-gold-500/5 text-gold-700",
+  star: "bg-gold-gradient text-[#14100a]",
+  blush: "border border-blush-500/30 bg-blush-50 text-blush-500",
+  sky: "border border-sky-600/25 bg-sky-50 text-sky-600",
+  mint: "border border-mint-700/25 bg-mint-100 text-mint-700",
+  gray: "border border-ink-faint/30 text-ink-faint",
 };
 
 export function Badge({ children, tone = "lavender", className = "" }: { children: ReactNode; tone?: BadgeTone; className?: string }) {

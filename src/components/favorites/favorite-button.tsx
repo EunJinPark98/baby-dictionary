@@ -43,14 +43,14 @@ export function FavoriteButton({ contentType, contentId, loginNext }: { contentT
   }, [contentType, contentId]);
 
   if (state.status === "loading") {
-    return <span className="inline-flex min-h-11 w-24 animate-pulse rounded-2xl bg-lavender-50" aria-hidden />;
+    return <span className="inline-flex min-h-11 w-24 animate-pulse rounded-2xl bg-gold-50" aria-hidden />;
   }
 
   if (state.status === "anonymous") {
     return (
       <Link
         href={`/login?next=${encodeURIComponent(loginNext)}`}
-        className="inline-flex min-h-11 items-center gap-1.5 rounded-2xl border border-line bg-white px-4 text-sm font-semibold text-ink-soft"
+        className="inline-flex min-h-11 items-center gap-1.5 rounded-2xl border border-line bg-surface px-4 text-sm font-semibold text-ink-soft"
       >
         ☆ 저장
       </Link>
@@ -84,7 +84,7 @@ export function FavoriteButton({ contentType, contentId, loginNext }: { contentT
       onClick={toggle}
       disabled={isPending}
       aria-pressed={saved}
-      className={`inline-flex min-h-11 items-center gap-1.5 rounded-2xl border px-4 text-sm font-semibold transition-colors ${saved ? "border-star-300 bg-star-100 text-star-700" : "border-line bg-white text-ink-soft"}`}
+      className={`inline-flex min-h-11 items-center gap-1.5 rounded-2xl border px-4 text-sm font-semibold transition-colors ${saved ? "border-gold-500/50 bg-gold-500/15 text-gold-700" : "border-line bg-surface text-ink-soft"}`}
     >
       {saved ? "★ 저장됨" : "☆ 저장"}
     </button>

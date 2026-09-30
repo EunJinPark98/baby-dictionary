@@ -16,7 +16,7 @@ export function ActivityCard({ activity }: { activity: ActivityRow }) {
         </span>
         <span className="mt-1.5 flex flex-wrap gap-1">
           {activity.categories.map((category) => (
-            <span key={category} className="rounded-full bg-lavender-50 px-2 py-0.5 text-[11px] font-semibold text-lavender-700">
+            <span key={category} className="rounded-full bg-gold-50 px-2 py-0.5 text-[11px] font-semibold text-gold-700">
               {ACTIVITY_CATEGORIES[category].emoji} {ACTIVITY_CATEGORIES[category].label}
             </span>
           ))}

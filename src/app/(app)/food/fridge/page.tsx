@@ -18,7 +18,8 @@ export default async function FridgePage() {
     <div>
       <PageHeader
         back={{ href: "/food", label: "이유식" }}
-        title="🧊 이유식 냉장고"
+        icon="🧊"
+        title="이유식 냉장고"
         description="가지고 있는 재료로 오늘 만들 수 있는 이유식을 찾아보세요."
       />
       {foods.length === 0 || recipes.length === 0 ? (

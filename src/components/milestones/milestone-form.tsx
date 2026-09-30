@@ -52,7 +52,7 @@ export function MilestoneForm({
         <TextInput id="title" name="title" maxLength={40} />
       </Field>
       {!stopId ? (
-        <ChoiceChips name="emoji" legend="아이콘" defaultValue="⭐" options={EMOJIS.map((e) => ({ value: e, label: e }))} />
+        <ChoiceChips name="emoji" legend="아이콘" defaultValue="⭐" options={EMOJIS.map((e) => ({ value: e, label: e === "⭐" ? "✦ 별" : e }))} />
       ) : null}
       <Field label="날짜" htmlFor="happened_on" error={errors.happened_on}>
         <TextInput id="happened_on" name="happened_on" type="date" required min={birthDate} max={today} defaultValue={today} />
@@ -63,7 +63,7 @@ export function MilestoneForm({
       <PhotoPicker key={pickerKey} userId={userId} folder="milestones" onUploadingChange={setUploading} />
       <FormMessage state={state?.fieldErrors ? { ok: false, message: state.message } : state} />
       <SubmitButton pending={pending} size="lg" className="w-full" disabled={uploading}>
-        ⭐ 별 기록하기
+        ✦ 별 기록하기
       </SubmitButton>
     </form>
   );

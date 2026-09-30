@@ -37,8 +37,8 @@ export function TriedFoodGrid({ babyId, foods, categories }: { babyId: string; f
 
   return (
     <div>
-      <p className="mb-4 rounded-2xl bg-star-50 px-4 py-3 text-[15px] font-semibold text-ink" aria-live="polite">
-        ⭐ 지금까지 <strong className="text-lavender-700">{triedCount}가지</strong> 재료를 경험했어요
+      <p className="mb-4 rounded-2xl border border-gold-500/25 bg-gold-500/[0.06] px-4 py-3 text-[15px] font-semibold text-ink" aria-live="polite">
+        ✦ 지금까지 <strong className="text-gold-700">{triedCount}가지</strong> 재료를 경험했어요
       </p>
       {categories.map((category) => {
         const list = optimisticFoods.filter((f) => f.category === category);
@@ -50,7 +50,7 @@ export function TriedFoodGrid({ babyId, foods, categories }: { babyId: string; f
             </h2>
             <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
               {list.map((food) => (
-                <li key={food.id} className={`overflow-hidden rounded-2xl border ${food.tried ? "border-star-300 bg-star-50" : "border-line bg-white"}`}>
+                <li key={food.id} className={`overflow-hidden rounded-2xl border ${food.tried ? "border-gold-500/45 bg-gold-500/[0.07] shadow-[0_0_20px_rgb(245_197_66/0.08)]" : "border-line bg-surface/80"}`}>
                   <button
                     type="button"
                     onClick={() => toggle(food)}
@@ -59,7 +59,7 @@ export function TriedFoodGrid({ babyId, foods, categories }: { babyId: string; f
                   >
                     <span
                       aria-hidden
-                      className={`flex size-7 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold ${food.tried ? "border-star-400 bg-star-400 text-white" : "border-line text-transparent"}`}
+                      className={`flex size-7 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold ${food.tried ? "border-transparent bg-gold-gradient text-[#14100a]" : "border-line text-transparent"}`}
                     >
                       ✓
                     </span>
@@ -76,7 +76,7 @@ export function TriedFoodGrid({ babyId, foods, categories }: { babyId: string; f
                   </button>
                   <Link
                     href={`/food/tried/${food.slug}`}
-                    className="flex min-h-10 items-center justify-center border-t border-line/70 text-[13px] font-semibold text-lavender-700"
+                    className="flex min-h-10 items-center justify-center border-t border-line/70 text-[13px] font-semibold text-gold-700"
                   >
                     {food.tried ? "기록 보기·수정" : "자세히 기록"}
                   </Link>

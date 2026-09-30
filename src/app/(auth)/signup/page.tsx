@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function SignupPage() {
   return (
     <div>
-      <h1 className="text-2xl font-extrabold text-ink">우리 아기 성장지도 만들기</h1>
+      <h1 className="text-gold-gradient text-[28px] font-bold leading-snug">우리 아기 성장지도 만들기</h1>
       <p className="mt-1.5 text-ink-soft">가입 후 아기 생년월일만 등록하면 오늘 필요한 정보가 자동으로 보여요.</p>
       <Card className="mt-6 space-y-4">
         <OAuthButtons next="/onboarding" />

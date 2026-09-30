@@ -26,10 +26,10 @@ export function MonthTabs({
                 href={`${basePath}?${param}=${month}`}
                 scroll={false}
                 aria-current={isSelected ? "page" : undefined}
-                className={`flex min-h-11 min-w-14 flex-col items-center justify-center whitespace-nowrap rounded-2xl border px-3 text-sm font-semibold ${isSelected ? "border-lavender-400 bg-lavender-600 text-white" : "border-line bg-white text-ink-soft"}`}
+                className={`flex min-h-11 min-w-14 flex-col items-center justify-center whitespace-nowrap rounded-full border px-3.5 text-sm font-semibold transition-colors ${isSelected ? "border-transparent bg-gold-gradient text-[#14100a] shadow-[var(--shadow-gold)]" : "border-line bg-surface/70 text-ink-soft hover:border-gold-500/40"}`}
               >
                 {month}개월
-                {isCurrent ? <span className={`text-[10px] ${isSelected ? "text-white/80" : "text-lavender-600"}`}>⭐ 지금</span> : null}
+                {isCurrent ? <span className={`text-[10px] ${isSelected ? "text-[#14100a]/75" : "text-gold-500"}`}>✦ 지금</span> : null}
               </Link>
             </li>
           );

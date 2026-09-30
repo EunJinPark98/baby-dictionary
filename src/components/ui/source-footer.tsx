@@ -19,14 +19,14 @@ export function SourceFooter({ sources, reviewedDates = [], hasSample = false }:
   const hasUnreviewed = reviewedDates.some((d) => !d);
 
   return (
-    <footer className="mt-10 rounded-2xl border border-line bg-white/70 px-4 py-4 text-[13px] leading-relaxed text-ink-soft">
-      <p className="font-bold text-ink">정보 출처</p>
+    <footer className="mt-10 rounded-2xl border border-line bg-surface/50 px-4 py-4 text-[13px] leading-relaxed text-ink-soft">
+      <p className="font-bold text-gold-700">정보 출처</p>
       {sources.length > 0 ? (
         <ul className="mt-1.5 space-y-1">
           {sources.map((source) => (
             <li key={source.id}>
               {source.url ? (
-                <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline decoration-lavender-200 underline-offset-2 hover:text-lavender-700">
+                <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline decoration-gold-300 underline-offset-2 hover:text-gold-700">
                   {source.organization} · {source.title}
                 </a>
               ) : (
@@ -41,7 +41,7 @@ export function SourceFooter({ sources, reviewedDates = [], hasSample = false }:
       ) : (
         <p className="mt-1">등록된 출처가 없어요.</p>
       )}
-      <p className="mt-3 font-bold text-ink">최종 검토일</p>
+      <p className="mt-3 font-bold text-gold-700">최종 검토일</p>
       <p className="mt-0.5">
         {latestReview ? formatDotDate(latestReview) : "전문가 검토 전"}
         {latestReview && hasUnreviewed ? " (일부 항목 검토 전)" : null}

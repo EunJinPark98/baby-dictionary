@@ -46,8 +46,8 @@ export function AdminForm({ action, fields, initial, sources, selectedSourceIds,
           ) : (
             <div className="space-y-1.5">
               {sources.map((source) => (
-                <label key={source.id} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-line bg-white px-3 text-sm">
-                  <input type="checkbox" name="source_ids" value={source.id} defaultChecked={selectedSourceIds.includes(source.id)} className="size-5 accent-lavender-600" />
+                <label key={source.id} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-line bg-surface px-3 text-sm">
+                  <input type="checkbox" name="source_ids" value={source.id} defaultChecked={selectedSourceIds.includes(source.id)} className="size-5 accent-gold-600" />
                   {source.label}
                 </label>
               ))}
@@ -71,12 +71,12 @@ function AdminField({ field, value, error }: { field: FieldSpec; value: AdminIni
   switch (field.type) {
     case "bool":
       return (
-        <label className="flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-white px-4">
+        <label className="flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-surface px-4">
           <span>
             <span className="text-sm font-semibold text-ink">{field.label}</span>
             {field.hint ? <span className="block text-[12px] text-ink-faint">{field.hint}</span> : null}
           </span>
-          <input type="checkbox" name={field.name} defaultChecked={Boolean(value)} className="size-6 accent-lavender-600" />
+          <input type="checkbox" name={field.name} defaultChecked={Boolean(value)} className="size-6 accent-gold-600" />
         </label>
       );
     case "select":
@@ -99,8 +99,8 @@ function AdminField({ field, value, error }: { field: FieldSpec; value: AdminIni
           <legend className="mb-1.5 text-sm font-semibold text-ink">{label}</legend>
           <div className="flex flex-wrap gap-2">
             {(field.options ?? []).map((o) => (
-              <label key={o.value} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-line bg-white px-3 text-sm">
-                <input type="checkbox" name={field.name} value={o.value} defaultChecked={selected.includes(o.value)} className="size-5 accent-lavender-600" />
+              <label key={o.value} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-line bg-surface px-3 text-sm">
+                <input type="checkbox" name={field.name} value={o.value} defaultChecked={selected.includes(o.value)} className="size-5 accent-gold-600" />
                 {o.label}
               </label>
             ))}

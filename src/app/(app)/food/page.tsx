@@ -50,7 +50,7 @@ export default async function FoodPage() {
       {triedCount !== null ? (
         <LinkCard href="/food/tried" tone="star" className="mb-4 flex items-center justify-between gap-3">
           <span className="text-[15px] font-semibold text-ink">
-            ⭐ 지금까지 <strong className="text-lavender-700">{triedCount}가지</strong> 재료를 경험했어요
+            ✦ 지금까지 <strong className="text-gold-700">{triedCount}가지</strong> 재료를 경험했어요
           </span>
           <span aria-hidden className="text-ink-faint">
             ›
@@ -61,17 +61,17 @@ export default async function FoodPage() {
       {stage ? (
         <Card tone="lavender" as="section">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm font-semibold text-lavender-700">현재 참고 단계</span>
+            <span className="text-sm font-semibold text-gold-700">현재 참고 단계</span>
             <SampleBadge show={stage.is_sample} />
           </div>
           <h2 className="mt-1 text-xl font-extrabold text-ink">{stage.title}</h2>
           <p className="mt-1 text-[15px] leading-relaxed text-ink-soft">{stage.summary}</p>
           <dl className="mt-3 grid grid-cols-2 gap-2 text-sm">
-            <div className="rounded-2xl bg-white px-3 py-2.5">
+            <div className="rounded-2xl bg-surface px-3 py-2.5">
               <dt className="text-[12px] font-semibold text-ink-faint">질감</dt>
               <dd className="font-semibold text-ink">{stage.texture || "-"}</dd>
             </div>
-            <div className="rounded-2xl bg-white px-3 py-2.5">
+            <div className="rounded-2xl bg-surface px-3 py-2.5">
               <dt className="text-[12px] font-semibold text-ink-faint">횟수</dt>
               <dd className="font-semibold text-ink">{stage.frequency || "-"}</dd>
             </div>
@@ -116,7 +116,7 @@ export default async function FoodPage() {
         <>
           <SectionTitle
             action={
-              <Link href="/food/recipes" className="min-h-11 content-center text-sm font-semibold text-lavender-700">
+              <Link href="/food/recipes" className="min-h-11 content-center text-sm font-semibold text-gold-700">
                 전체 ›
               </Link>
             }
@@ -141,9 +141,9 @@ export default async function FoodPage() {
           {stages.map((s) => (
             <li
               key={s.id}
-              className={`flex items-center gap-3 rounded-2xl border px-4 py-3 ${s.id === stage?.id ? "border-lavender-300 bg-lavender-50" : "border-line bg-white"}`}
+              className={`flex items-center gap-3 rounded-2xl border px-4 py-3 ${s.id === stage?.id ? "border-gold-300 bg-gold-50" : "border-line bg-surface"}`}
             >
-              <span className="w-20 shrink-0 text-sm font-bold text-lavender-700">{formatMonthRange(s.min_month, s.max_month)}</span>
+              <span className="w-20 shrink-0 text-sm font-bold text-gold-700">{formatMonthRange(s.min_month, s.max_month)}</span>
               <span className="min-w-0">
                 <span className="block font-semibold text-ink">{s.title}</span>
                 <span className="block text-[13px] text-ink-soft">{s.texture}</span>
@@ -156,7 +156,7 @@ export default async function FoodPage() {
       {!context ? (
         <div className="mt-6">
           <Link href="/signup" className={buttonClass("primary", "lg", "w-full")}>
-            ⭐ 우리 아기 맞춤 이유식 보기
+            ✦ 우리 아기 맞춤 이유식 보기
           </Link>
         </div>
       ) : null}

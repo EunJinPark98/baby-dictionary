@@ -2,6 +2,7 @@ import { MilestoneForm } from "@/components/milestones/milestone-form";
 import { Card } from "@/components/ui/card";
 import { PageHeader, SectionTitle } from "@/components/ui/page-header";
 import { EmptyState } from "@/components/ui/states";
+import { ContentEmoji } from "@/components/ui/star";
 import { addMilestone, deleteMilestone } from "@/lib/actions/records";
 import { getBabyAge, formatAgeLabel } from "@/lib/age/age";
 import { formatDotDate } from "@/lib/date/date-only";
@@ -45,20 +46,20 @@ export default async function MilestonesPage({ searchParams }: PageProps<"/baby/
       {milestones.length === 0 ? (
         <EmptyState emoji="🌟" title="아직 기록한 별이 없어요" description="첫 미소, 첫 뒤집기처럼 작은 순간도 소중한 별이에요." />
       ) : (
-        <ol className="relative space-y-3 border-l-[3px] border-dotted border-star-200 pl-5">
+        <ol className="relative space-y-3 border-l-2 border-gold-500/30 pl-5">
           {milestones.map((milestone) => {
             const photoUrl = milestone.photo_path ? photoUrls.get(milestone.photo_path) : undefined;
             const ageAt = getBabyAge(baby.birth_date, milestone.happened_on);
             return (
               <li key={milestone.id} className="relative">
-                <span aria-hidden className="absolute -left-[1.95rem] top-4 flex size-7 items-center justify-center rounded-full bg-star-100 text-sm">
-                  {milestone.emoji}
+                <span aria-hidden className="absolute -left-[1.95rem] top-4 flex size-7 items-center justify-center rounded-full border border-gold-500/40 bg-surface-2 text-sm">
+                  <ContentEmoji emoji={milestone.emoji} />
                 </span>
-                <article className="rounded-2xl border border-line bg-white p-4 shadow-[var(--shadow-soft)]">
+                <article className="rounded-2xl border border-line bg-surface p-4 shadow-[var(--shadow-soft)]">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <h3 className="font-bold text-ink">
-                        {milestone.emoji} {milestone.title}
+                        <ContentEmoji emoji={milestone.emoji} /> {milestone.title}
                       </h3>
                       <p className="text-[13px] text-ink-soft">
                         {formatDotDate(milestone.happened_on)} · 생후 {ageAt.days}일 ({formatAgeLabel(ageAt)})

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Star } from "@/components/ui/star";
+import { ContentEmoji, Star } from "@/components/ui/star";
 import type { JourneyPosition, JourneyStopState } from "@/lib/content/select";
 import { formatDotDate } from "@/lib/date/date-only";
 import { withTopic } from "@/lib/korean";
@@ -23,9 +23,9 @@ function formatTypicalRange(stop: JourneyStopRow): string {
 }
 
 const nodeStyles: Record<JourneyStopState, string> = {
-  passed: "bg-white border-lavender-200",
-  now: "bg-lavender-100 border-lavender-400 ring-4 ring-lavender-100",
-  upcoming: "bg-white border-dashed border-lavender-200",
+  passed: "bg-surface-2 border-gold-500/35",
+  now: "bg-gold-100 border-gold-500 shadow-[0_0_0_5px_rgb(245_197_66/0.12),0_0_22px_rgb(245_197_66/0.45)]",
+  upcoming: "bg-night border-dashed border-gold-500/25 opacity-80",
 };
 
 /**
@@ -41,12 +41,12 @@ export function JourneyMap({ babyName, ageLabel, position, discovered, photoUrl 
   });
 
   return (
-    <ol className="relative ml-1 space-y-3 border-l-[3px] border-dotted border-lavender-200 pl-6" aria-label="성장지도">
+    <ol className="relative ml-1 space-y-3 pl-6 before:absolute before:bottom-4 before:left-[-1px] before:top-4 before:w-0.5 before:rounded-full before:bg-gradient-to-b before:from-gold-500/70 before:via-gold-500/35 before:to-gold-500/10" aria-label="성장지도">
       {items.map((item) => {
         if (item.type === "marker") {
           return (
             <li key="marker" className="relative" aria-current="step">
-              <span className="absolute -left-[2.35rem] top-1/2 flex size-9 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-star-300 text-lg shadow-md">
+              <span className="absolute -left-[2.35rem] top-1/2 flex size-9 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 border-gold-700 bg-surface-2 text-lg shadow-[0_0_24px_rgb(245_197_66/0.7)]">
                 {photoUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element -- 짧은 만료의 비공개 signed URL
                   <img src={photoUrl} alt="" className="size-full object-cover" />
@@ -54,11 +54,11 @@ export function JourneyMap({ babyName, ageLabel, position, discovered, photoUrl 
                   <span aria-hidden>👶</span>
                 )}
               </span>
-              <div className="rounded-2xl bg-star-300 px-4 py-3 font-bold text-ink shadow-[var(--shadow-soft)]">
+              <div className="rounded-2xl bg-gold-gradient px-4 py-3 font-bold text-[#14100a] shadow-[var(--shadow-gold)]">
                 <span className="inline-flex items-center gap-1.5">
                   <Star className="size-5 animate-twinkle" /> 지금 {withTopic(babyName)} 여기 있어요
                 </span>
-                <span className="block text-sm font-semibold text-ink/70">{ageLabel}</span>
+                <span className="block text-sm font-semibold text-[#14100a]/70">{ageLabel}</span>
               </div>
             </li>
           );
@@ -72,23 +72,23 @@ export function JourneyMap({ babyName, ageLabel, position, discovered, photoUrl 
               className={`absolute -left-[2.2rem] top-5 flex size-8 items-center justify-center rounded-full border-2 text-base ${nodeStyles[state]}`}
               aria-hidden
             >
-              {discoveredOn ? <Star className="size-5" /> : stop.emoji}
+              {discoveredOn ? <Star className="size-5" glow /> : state === "upcoming" ? <Star className="size-4" filled={false} /> : <ContentEmoji emoji={stop.emoji} />}
             </span>
             <details
-              className={`group rounded-[var(--radius-card)] border bg-white shadow-[var(--shadow-soft)] ${state === "now" ? "border-lavender-300" : "border-line"} ${state === "upcoming" && !discoveredOn ? "opacity-90" : ""}`}
+              className={`group rounded-[var(--radius-card)] border shadow-[var(--shadow-soft)] ${state === "now" ? "card-night border-gold-500/50" : "border-line bg-surface/80"} ${state === "upcoming" && !discoveredOn ? "opacity-90" : ""}`}
             >
               <summary className="flex min-h-16 items-center gap-3 px-4 py-3">
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
                     <span className="text-[16px] font-bold text-ink">
-                      {stop.emoji} {stop.title}
+                      <ContentEmoji emoji={stop.emoji} /> {stop.title}
                     </span>
                     {state === "now" ? (
-                      <span className="rounded-full bg-lavender-100 px-2 py-0.5 text-[11px] font-bold text-lavender-700">지금 시기</span>
+                      <span className="rounded-full border border-gold-500/40 bg-gold-500/10 px-2 py-0.5 text-[11px] font-bold text-gold-700">지금 시기</span>
                     ) : null}
                     {discoveredOn ? (
-                      <span className="rounded-full bg-star-100 px-2 py-0.5 text-[11px] font-bold text-star-700">
-                        ⭐ {formatDotDate(discoveredOn)} 발견
+                      <span className="rounded-full bg-gold-gradient px-2 py-0.5 text-[11px] font-bold text-[#14100a]">
+                        ✦ {formatDotDate(discoveredOn)} 발견
                       </span>
                     ) : null}
                   </span>
@@ -105,7 +105,7 @@ export function JourneyMap({ babyName, ageLabel, position, discovered, photoUrl 
                   <ul className="space-y-1.5">
                     {stop.tips.map((tip) => (
                       <li key={tip} className="flex gap-2">
-                        <span aria-hidden>🌟</span>
+                        <span aria-hidden className="text-gold-500">✦</span>
                         <span>{tip}</span>
                       </li>
                     ))}
@@ -114,9 +114,9 @@ export function JourneyMap({ babyName, ageLabel, position, discovered, photoUrl 
                 {stop.kind !== "start" ? (
                   <Link
                     href={`/baby/milestones?stop=${stop.slug}`}
-                    className="inline-flex min-h-11 items-center rounded-2xl bg-lavender-50 px-4 text-sm font-semibold text-lavender-700"
+                    className="inline-flex min-h-11 items-center rounded-full border border-gold-500/30 bg-gold-500/10 px-4 text-sm font-semibold text-gold-700"
                   >
-                    {discoveredOn ? "기록 보기" : "⭐ 이 순간 기록하기"}
+                    {discoveredOn ? "기록 보기" : "✦ 이 순간 기록하기"}
                   </Link>
                 ) : null}
               </div>

@@ -30,9 +30,9 @@ export const DEVELOPMENT_DOMAIN_ORDER: DevelopmentDomain[] = [
 ];
 
 export const DEVELOPMENT_STATUSES: Record<DevelopmentStatus, LabelInfo> = {
-  doing: { label: "하고 있어요", emoji: "⭐" },
-  not_yet: { label: "아직이에요", emoji: "🌙" },
-  unsure: { label: "잘 모르겠어요", emoji: "☁️" },
+  doing: { label: "하고 있어요", emoji: "✦" },
+  not_yet: { label: "아직이에요", emoji: "☾" },
+  unsure: { label: "잘 모르겠어요", emoji: "?" },
 };
 
 export const DEVELOPMENT_STATUS_ORDER: DevelopmentStatus[] = ["doing", "not_yet", "unsure"];
