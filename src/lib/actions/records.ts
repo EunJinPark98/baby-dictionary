@@ -1,12 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { todayIsoDate } from "@/lib/date/date-only";
 import { PHOTO_BUCKET, requireUser } from "@/lib/queries/baby";
 import type { DevelopmentStatus, FoodPreference } from "@/lib/supabase/database.types";
 import { createClient } from "@/lib/supabase/server";
 import { isOwnPhotoPath } from "@/lib/validation/baby";
 import { validateGrowthInput, validateMemo, validateRecordDate } from "@/lib/validation/records";
+import { buildVaccineSchedule } from "@/lib/vaccines/schedule";
 import { actionError, actionOk, formOptionalNumber, formOptionalString, formString, type ActionState } from "./types";
 
 /**
@@ -147,7 +149,8 @@ export async function saveVaccination(
 
   revalidatePath("/baby/vaccines");
   revalidatePath("/today");
-  return actionOk("접종 기록을 저장했어요.");
+  // 저장 후 항목이 '완료' 목록으로 이동하므로, 페이지 상단에서 결과를 알려준다.
+  redirect(`/baby/vaccines?saved=${vaccineId}`);
 }
 
 export async function deleteVaccination(babyId: string, vaccineId: string): Promise<void> {
@@ -249,4 +252,33 @@ export async function deleteMilestone(milestoneId: string): Promise<void> {
   if (!error && data.photo_path) await supabase.storage.from(PHOTO_BUCKET).remove([data.photo_path]);
   revalidatePath("/baby/milestones");
   revalidatePath("/map");
+}
+
+/**
+ * 권장 시기가 이미 지난(기록 없는) 접종을 한 번에 완료로 기록한다.
+ * 조금 자란 뒤 가입한 부모가 "확인이 필요해요" 목록에 압도되지 않도록 돕는다.
+ * 접종일은 권장 시작일(오늘 이후면 오늘)로 기록하고 메모로 일괄 기록임을 남긴다. 이후 수정 가능.
+ */
+export async function markPastVaccinesDone(babyId: string): Promise<void> {
+  const { supabase, baby } = await getOwnedBaby(babyId);
+  if (!baby) return;
+  const today = todayIsoDate();
+  const [{ data: vaccines }, { data: records }] = await Promise.all([
+    supabase.from("vaccines").select("*").eq("is_active", true),
+    supabase.from("vaccination_records").select("vaccine_id, vaccinated_on").eq("baby_id", babyId),
+  ]);
+  const schedule = buildVaccineSchedule(vaccines ?? [], baby.birth_date, today, records ?? []);
+  const rows = schedule
+    .filter((s) => s.status === "check")
+    .map((s) => ({
+      baby_id: babyId,
+      vaccine_id: s.vaccine.id,
+      vaccinated_on: s.recommendedFrom <= today ? s.recommendedFrom : today,
+      memo: "일괄 기록 (권장 시작일 기준, 실제 날짜로 수정할 수 있어요)",
+    }));
+  if (rows.length > 0) {
+    await supabase.from("vaccination_records").upsert(rows, { onConflict: "baby_id,vaccine_id", ignoreDuplicates: true });
+  }
+  revalidatePath("/baby/vaccines");
+  revalidatePath("/today");
 }

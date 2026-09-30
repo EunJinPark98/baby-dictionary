@@ -4,7 +4,8 @@ import { PageHeader, SectionTitle } from "@/components/ui/page-header";
 import { SourceFooter } from "@/components/ui/source-footer";
 import { EmptyState } from "@/components/ui/states";
 import { VaccineRecordForm } from "@/components/vaccines/vaccine-record-form";
-import { deleteVaccination, saveVaccination } from "@/lib/actions/records";
+import { deleteVaccination, markPastVaccinesDone, saveVaccination } from "@/lib/actions/records";
+import { ConfirmDeleteButton } from "@/components/ui/confirm-delete";
 import { formatDotDate, type IsoDate } from "@/lib/date/date-only";
 import { withPossessive } from "@/lib/korean";
 import { getBabyContext } from "@/lib/queries/baby";
@@ -25,8 +26,9 @@ const statusTone = {
   done: "bg-mint-100 text-mint-700",
 } as const;
 
-export default async function VaccinesPage() {
+export default async function VaccinesPage({ searchParams }: PageProps<"/baby/vaccines">) {
   const { baby, today } = await getBabyContext();
+  const params = await searchParams;
   const [vaccines, records] = await Promise.all([getVaccines(), getVaccinationRecords(baby.id)]);
   const schedule = buildVaccineSchedule(vaccines, baby.birth_date, today, records);
   const grouped = groupVaccineSchedule(schedule);
@@ -37,6 +39,8 @@ export default async function VaccinesPage() {
   );
   const referenceDates = [...new Set(vaccines.map((v) => v.data_reference_date))];
   const hasSample = vaccines.some((v) => v.is_sample);
+  const savedVaccine = typeof params.saved === "string" ? vaccines.find((v) => v.id === params.saved) : undefined;
+  const checkCount = grouped.toCheck.filter((s) => s.status === "check").length;
 
   const renderItem = (item: ScheduledVaccine<VaccineRow>) => (
     <VaccineItem
@@ -53,6 +57,13 @@ export default async function VaccinesPage() {
     <div>
       <PageHeader back={{ href: "/baby", label: "우리아기" }} eyebrow={withPossessive(baby.name)} title="예방접종" description="생년월일로 계산한 권장 시기예요. 접종 후 날짜를 기록해 두세요." />
 
+      {savedVaccine ? (
+        <div className="mb-3" role="status">
+          <Callout emoji="✅" tone="lavender">
+            {savedVaccine.name} {savedVaccine.dose_label} 접종을 기록했어요.
+          </Callout>
+        </div>
+      ) : null}
       <Callout emoji="📌" tone={hasSample ? "blush" : "lavender"}>
         <p className="font-semibold">공식 접종 일정은 변경될 수 있어요.</p>
         <p className="mt-0.5">
@@ -76,7 +87,18 @@ export default async function VaccinesPage() {
           {grouped.toCheck.length === 0 ? (
             <p className="rounded-2xl bg-white/70 px-4 py-4 text-sm text-ink-soft">지금 확인할 접종이 없어요. 👍</p>
           ) : (
-            <ul className="space-y-2">{grouped.toCheck.map(renderItem)}</ul>
+            <>
+              {checkCount >= 2 ? (
+                <div className="mb-3 rounded-2xl border border-lavender-100 bg-lavender-50 p-4 text-sm text-ink-soft">
+                  <p>
+                    권장 시기가 지난 접종이 <strong className="text-ink">{checkCount}개</strong> 있어요. 이미 맞았다면 한 번에 기록할 수 있어요. (접종일은 권장 시작일로
+                    기록되며, 나중에 실제 날짜로 고칠 수 있어요.)
+                  </p>
+                  <BulkButton action={markPastVaccinesDone.bind(null, baby.id)} count={checkCount} />
+                </div>
+              ) : null}
+              <ul className="space-y-2">{grouped.toCheck.map(renderItem)}</ul>
+            </>
           )}
 
           <SectionTitle>완료 ✓</SectionTitle>
@@ -177,4 +199,8 @@ function VaccineItem({
       </details>
     </li>
   );
+}
+
+function BulkButton({ action, count }: { action: () => Promise<void>; count: number }) {
+  return <ConfirmDeleteButton action={action} label={`지난 접종 ${count}개 모두 완료로 기록`} confirmLabel="네, 모두 맞았어요" size="sm" variant="primary" pendingText="기록 중…" />;
 }

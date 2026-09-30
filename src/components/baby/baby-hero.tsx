@@ -29,7 +29,7 @@ export function BabyHero({ name, age, photoUrl }: BabyHeroProps) {
         <div className="flex size-18 shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-white text-4xl shadow-sm">
           {photoUrl ? (
             // eslint-disable-next-line @next/next/no-img-element -- 짧은 만료의 비공개 signed URL
-            <img src={photoUrl} alt={`${name} 프로필 사진`} className="size-full object-cover" />
+            <img src={photoUrl} alt="" className="size-full object-cover" />
           ) : (
             <span aria-hidden>👶</span>
           )}

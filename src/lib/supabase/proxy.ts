@@ -39,7 +39,7 @@ export async function updateSession(request: NextRequest) {
     url.pathname = "/login";
     url.search = "";
     url.searchParams.set("next", pathname + request.nextUrl.search);
-    return redirectWithCookies(url, response);
+    return withPrivacyHeaders(redirectWithCookies(url, response), true);
   }
 
   if (isLoggedIn && (pathname === "/" || matchesPrefix(pathname, AUTH_PAGES))) {

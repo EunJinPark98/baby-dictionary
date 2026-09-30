@@ -168,7 +168,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
             href="/safety"
             emoji="⚠️"
             label="안전"
-            title={safety ? `${safety.trigger_label ? `${safety.trigger_label} · ` : ""}${safety.title}` : "우리 집 안전 점검"}
+            title={safety ? (safety.trigger_label && !safety.title.includes(safety.trigger_label) ? `${safety.trigger_label} · ${safety.title}` : safety.title) : "우리 집 안전 점검"}
             description={safety?.summary ?? null}
           />
         </li>
