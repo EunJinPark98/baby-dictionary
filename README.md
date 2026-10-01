@@ -103,10 +103,10 @@ Supabase 환경변수가 없어도 빌드와 공개 페이지 렌더링은 동�
 
 도메인이 없어도 Vercel 이 `https://<프로젝트명>.vercel.app` 주소를 줍니다.
 
-1. [supabase.com](https://supabase.com) 에서 무료 프로젝트 생성 → SQL Editor 에서 위 2번(마이그레이션 2개 + seed) 실행
+1. [supabase.com](https://supabase.com) 에서 무료 프로젝트 생성 → SQL Editor 에서 `supabase/setup_all.sql` (마이그레이션 2개 + seed 묶음) 전체를 붙여넣고 Run
 2. Authentication → Providers → Email 에서 **Confirm email 을 끄면** 가입 즉시 로그인되어 테스트가 편해요 (공개 전 다시 켜기)
 3. [vercel.com](https://vercel.com) → Add New Project → GitHub 저장소 `baby-dictionary` 선택, 브랜치 `claude/baby-star-map-mvp`
-4. Environment Variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SITE_URL`(= 배포된 vercel.app 주소) → Deploy
+4. Environment Variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` → Deploy (`NEXT_PUBLIC_SITE_URL` 은 비워두면 vercel.app 주소를 자동 사용)
 5. Supabase Authentication → URL Configuration 의 Site URL 과 Redirect URLs 에 `https://<프로젝트명>.vercel.app` 와 `https://<프로젝트명>.vercel.app/auth/callback` 추가
 
 Supabase 없이 배포해도 빌드는 되지만, 로그인·기록 기능은 동작하지 않고 콘텐츠도 비어 보여요.
