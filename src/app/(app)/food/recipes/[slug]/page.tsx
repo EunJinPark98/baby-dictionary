@@ -14,7 +14,11 @@ import { pageMetadata, SITE_NAME } from "@/lib/seo";
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  const recipes = await getRecipes();
+  // 빌드 시 콘텐츠를 못 불러와도 배포는 계속되게 한다 (페이지는 요청 시점에 생성됨).
+  const recipes = await getRecipes().catch((error: unknown) => {
+    console.error("[build] getRecipes failed; pages will be generated on demand.", error);
+    return [];
+  });
   return recipes.map((r) => ({ slug: r.slug }));
 }
 

@@ -12,7 +12,11 @@ import { pageMetadata } from "@/lib/seo";
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  const activities = await getActivities();
+  // 빌드 시 콘텐츠를 못 불러와도 배포는 계속되게 한다 (페이지는 요청 시점에 생성됨).
+  const activities = await getActivities().catch((error: unknown) => {
+    console.error("[build] getActivities failed; pages will be generated on demand.", error);
+    return [];
+  });
   return activities.map((a) => ({ slug: a.slug }));
 }
 

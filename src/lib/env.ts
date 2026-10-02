@@ -10,10 +10,32 @@ export interface SupabasePublicEnv {
   anonKey: string;
 }
 
+/**
+ * Supabase 프로젝트 URL 정규화.
+ * 대시보드에서 흔히 잘못 복사하는 형태를 프로젝트 주소(https://<ref>.supabase.co)로 바로잡는다.
+ *  - "https://<ref>.supabase.co/rest/v1/" (Data API 의 API URL) → 경로 제거
+ *  - "https://supabase.com/dashboard/project/<ref>" (대시보드 주소) → https://<ref>.supabase.co
+ *  - 앞뒤 공백·따옴표, 프로토콜 누락
+ */
+export function normalizeSupabaseUrl(raw: string): string | null {
+  let value = raw.trim().replace(/^["']|["']$/g, "").trim();
+  if (!value) return null;
+  const dashboard = /supabase\.com\/dashboard\/project\/([a-z0-9]+)/i.exec(value);
+  if (dashboard) return `https://${dashboard[1].toLowerCase()}.supabase.co`;
+  if (!/^https?:\/\//i.test(value)) value = `https://${value}`;
+  try {
+    return new URL(value).origin;
+  } catch {
+    return null;
+  }
+}
+
 export function getSupabasePublicEnv(): SupabasePublicEnv | null {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !anonKey) return null;
+  const rawUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim().replace(/^["']|["']$/g, "");
+  if (!rawUrl || !anonKey) return null;
+  const url = normalizeSupabaseUrl(rawUrl);
+  if (!url) return null;
   return { url, anonKey };
 }
 
