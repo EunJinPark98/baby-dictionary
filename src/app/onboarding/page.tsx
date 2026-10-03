@@ -6,14 +6,15 @@ import { Card } from "@/components/ui/card";
 import { Star } from "@/components/ui/star";
 import { createBaby } from "@/lib/actions/baby";
 import { todayIsoDate } from "@/lib/date/date-only";
-import { getBabies, requireUser } from "@/lib/queries/baby";
+import { getBabies, getCurrentUser } from "@/lib/queries/baby";
 import { privateMetadata } from "@/lib/seo";
 
 export const metadata = privateMetadata("아기 등록");
 
 export default async function OnboardingPage({ searchParams }: PageProps<"/onboarding">) {
-  const user = await requireUser();
-  const babies = await getBabies();
+  // 로그인 없이 들어오는 시작 화면. 생년월일을 저장하는 순간 게스트 세션이 만들어진다.
+  const user = await getCurrentUser();
+  const babies = user ? await getBabies() : [];
   const params = await searchParams;
   const isAdding = params.add === "1";
   if (babies.length > 0 && !isAdding) redirect("/today");
@@ -36,11 +37,19 @@ export default async function OnboardingPage({ searchParams }: PageProps<"/onboa
         <h1 className="text-gold-gradient mt-2 text-[28px] font-bold leading-snug">
           우리 아기를 소개해 주세요
         </h1>
-        <p className="mt-1.5 text-ink-soft">생년월일만 알면 오늘 필요한 발달·이유식·놀이·접종 정보를 자동으로 보여드려요.</p>
+        <p className="mt-1.5 text-ink-soft">가입이나 로그인 없이, 생년월일만 입력하면 오늘 필요한 발달·이유식·놀이·접종 정보를 바로 보여드려요.</p>
         <Card className="mt-6">
-          <BabyForm action={createBaby} userId={user.id} today={todayIsoDate()} submitLabel="✦ 성장지도 시작하기" />
+          <BabyForm action={createBaby} userId={user?.id ?? null} today={todayIsoDate()} submitLabel="✦ 성장지도 시작하기" />
         </Card>
-        <p className="mt-4 text-center text-[13px] text-ink-faint">꼭 필요한 정보만 저장하며, 기록은 나만 볼 수 있어요.</p>
+        <p className="mt-4 text-center text-[13px] leading-relaxed text-ink-faint">
+          꼭 필요한 정보만 저장하며, 기록은 나만 볼 수 있어요.
+          {user ? null : (
+            <>
+              <br />
+              기록은 지금 쓰는 브라우저에 연결돼요.
+            </>
+          )}
+        </p>
       </main>
     </div>
   );

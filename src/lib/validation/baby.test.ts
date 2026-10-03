@@ -12,8 +12,9 @@ describe("validateBabyInput", () => {
     });
   });
 
-  it("rejects empty or long names", () => {
-    expect(validateBabyInput({ ...valid, name: "  " }, ctx).ok).toBe(false);
+  it("uses a default name when left empty and rejects long names", () => {
+    const empty = validateBabyInput({ ...valid, name: "  " }, ctx);
+    expect(empty.ok && empty.value.name).toBe("우리 아기");
     expect(validateBabyInput({ ...valid, name: "가".repeat(21) }, ctx).ok).toBe(false);
   });
 

@@ -11,7 +11,7 @@ type State = { status: "loading" } | { status: "anonymous" } | { status: "ready"
  * 즐겨찾기 버튼. 공개(정적) 페이지에서도 동작하도록 클라이언트에서 로그인 상태를 확인한다.
  * favorites 테이블 RLS 로 본인 데이터만 읽고 쓴다.
  */
-export function FavoriteButton({ contentType, contentId, loginNext }: { contentType: FavoriteContentType; contentId: string; loginNext: string }) {
+export function FavoriteButton({ contentType, contentId }: { contentType: FavoriteContentType; contentId: string }) {
   const [state, setState] = useState<State>({ status: "loading" });
   const [isPending, startTransition] = useTransition();
 
@@ -49,7 +49,7 @@ export function FavoriteButton({ contentType, contentId, loginNext }: { contentT
   if (state.status === "anonymous") {
     return (
       <Link
-        href={`/login?next=${encodeURIComponent(loginNext)}`}
+        href="/onboarding"
         className="inline-flex min-h-11 items-center gap-1.5 rounded-2xl border border-line bg-surface px-4 text-sm font-semibold text-ink-soft"
       >
         ☆ 저장

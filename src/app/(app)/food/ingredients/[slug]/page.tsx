@@ -57,7 +57,7 @@ export default async function IngredientDetailPage({ params }: PageProps<"/food/
         icon={food.emoji}
         title={`${food.name}`}
         description={food.description}
-        action={<FavoriteButton contentType="food" contentId={food.id} loginNext={`/food/ingredients/${food.slug}`} />}
+        action={<FavoriteButton contentType="food" contentId={food.id} />}
       />
       <div className="flex flex-wrap gap-1.5">
         <Badge tone="lavender">

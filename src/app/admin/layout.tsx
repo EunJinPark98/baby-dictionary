@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { Logo } from "@/components/layout/logo";
-import { getIsAdmin, requireUser } from "@/lib/queries/baby";
+import { getCurrentUser, getIsAdmin } from "@/lib/queries/baby";
 import { privateMetadata } from "@/lib/seo";
 
 export const metadata = privateMetadata("관리자");
 
 /** 관리자 전용. 권한이 없으면 존재 자체를 드러내지 않도록 404. (쓰기 권한은 RLS 가 최종 강제) */
 export default async function AdminLayout({ children }: { children: ReactNode }) {
-  await requireUser();
+  if (!(await getCurrentUser())) redirect("/login?next=/admin");
   if (!(await getIsAdmin())) notFound();
 
   return (

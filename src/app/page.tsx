@@ -79,8 +79,8 @@ export default function LandingPage() {
       <header className="sticky top-0 z-30 bg-gradient-to-b from-night/85 to-night/0 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5">
           <Logo />
-          <Link href="/login" className="min-h-11 content-center px-2 text-sm font-semibold text-ink-soft hover:text-gold-700">
-            로그인
+          <Link href="/onboarding" className="min-h-11 content-center px-2 text-sm font-semibold text-ink-soft hover:text-gold-700">
+            시작하기
           </Link>
         </div>
       </header>
@@ -104,12 +104,12 @@ export default function LandingPage() {
             우리 아기의 성장 길을 한눈에.
           </p>
           <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-ink-soft md:text-[16px]">
-            검색하지 않아도 괜찮아요. 생년월일만 등록하면
+            가입도 로그인도 필요 없어요. 생년월일만 입력하면
             <br className="hidden sm:block" /> &ldquo;오늘 우리 아기에게 무엇을 해줘야 하지?&rdquo;에 답해드려요.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="/signup" className={buttonClass("primary", "lg", "sm:px-9")}>
-              ✦ 우리 아기 성장지도 만들기
+            <Link href="/onboarding" className={buttonClass("primary", "lg", "sm:px-9")}>
+              ✦ 생년월일 입력하고 시작하기
             </Link>
             <Link href="/guide" className={buttonClass("secondary", "lg")}>
               월령별 가이드 보기
@@ -209,7 +209,7 @@ export default function LandingPage() {
             아기별 지도는 &lsquo;정상/비정상&rsquo;을 판단하거나 점수를 매기지 않아요. 이 시기에 관찰될 수 있는 모습과 부모가 해줄 수 있는 것을 알려드려요. 의료 진단을 대신하지 않으며, 걱정되는 점이
             있다면 소아청소년과 등 전문가와 상담하세요. 아기 기록은 나만 볼 수 있게 안전하게 보관돼요.
           </p>
-          <Link href="/signup" className={buttonClass("primary", "lg", "mt-8 px-9")}>
+          <Link href="/onboarding" className={buttonClass("primary", "lg", "mt-8 px-9")}>
             ✦ 지금 시작하기
           </Link>
         </section>

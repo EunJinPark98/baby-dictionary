@@ -21,11 +21,17 @@ export const getCurrentUser = cache(async (): Promise<User | null> => {
   return data.user ?? null;
 });
 
+/** 세션(이메일 계정 또는 게스트)이 없으면 생년월일 입력 화면으로 보낸다. */
 export const requireUser = cache(async (): Promise<User> => {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/onboarding");
   return user;
 });
+
+/** 생년월일만 입력하고 시작한 게스트(Supabase 익명 로그인) 인지 */
+export function isGuestUser(user: User): boolean {
+  return user.is_anonymous === true;
+}
 
 export const getBabies = cache(async (): Promise<BabyRow[]> => {
   const supabase = await createClient();
@@ -45,7 +51,7 @@ export interface BabyContext {
 
 /**
  * 개인 페이지 공통 컨텍스트: 로그인 사용자 + 선택된 아기 + 오늘 기준 월령.
- * 로그인하지 않았으면 /login, 아기가 없으면 /onboarding 으로 보낸다.
+ * 세션이 없거나 아기가 없으면 /onboarding 으로 보낸다.
  */
 export const getBabyContext = cache(async (): Promise<BabyContext> => {
   const user = await requireUser();

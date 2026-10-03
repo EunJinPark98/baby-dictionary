@@ -45,7 +45,7 @@ export default async function ActivityDetailPage({ params }: PageProps<"/play/[s
         icon={activity.emoji}
         title={`${activity.title}`}
         description={activity.description}
-        action={<FavoriteButton contentType="activity" contentId={activity.id} loginNext={`/play/${activity.slug}`} />}
+        action={<FavoriteButton contentType="activity" contentId={activity.id} />}
       />
       <SampleBadge show={activity.is_sample} />
 

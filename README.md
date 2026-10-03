@@ -89,7 +89,8 @@ Supabase 환경변수가 없어도 빌드와 공개 페이지 렌더링은 동�
 4. **Auth → URL Configuration**
    - Site URL: 배포 도메인 (예: `https://your-domain.com`)
    - Redirect URLs: `http://localhost:3000/auth/callback`, `https://your-domain.com/auth/callback`
-5. **Auth → Providers → Email**: 활성화. 이메일 인증(Confirm email)을 켜면 가입 후 메일 링크 → `/auth/callback` → `/onboarding` 으로 이동합니다.
+5. **Auth → Sign In / Providers → "Allow anonymous sign-ins" 켜기 (필수)**: 사용자는 로그인 없이 생년월일만 입력해 시작합니다. 이때 앱이 게스트(익명) 세션을 만들어 기록을 저장하며, 게스트도 `auth.uid()` 를 가지므로 RLS 가 그대로 적용됩니다. 꺼져 있으면 시작 화면에서 "지금은 바로 시작할 수 없어요" 가 표시됩니다. 게스트 기록은 그 브라우저(세션 쿠키)에 연결되므로, 브라우저 데이터를 지우면 다시 볼 수 없습니다. 남용이 걱정되면 Auth → Attack Protection 에서 CAPTCHA 를 켜거나 익명 가입 rate limit 을 조정하세요.
+   - **Auth → Providers → Email**: 관리자(/admin) 로그인용으로 활성화. 이메일 인증(Confirm email)을 켜면 가입 후 메일 링크 → `/auth/callback` → `/onboarding` 으로 이동합니다.
 6. **Storage**: 마이그레이션이 비공개 버킷 `baby-photos` 와 정책을 생성합니다 (경로 `{user_id}/...`, 본인만 접근, 화면에는 1시간 만료 signed URL).
 7. **관리자 지정**: 가입 후 SQL Editor 에서
    ```sql

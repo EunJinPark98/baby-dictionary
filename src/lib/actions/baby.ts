@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { todayIsoDate } from "@/lib/date/date-only";
-import { PHOTO_BUCKET, SELECTED_BABY_COOKIE, requireUser } from "@/lib/queries/baby";
+import { PHOTO_BUCKET, SELECTED_BABY_COOKIE, getCurrentUser, requireUser } from "@/lib/queries/baby";
 import { createClient } from "@/lib/supabase/server";
 import { validateBabyInput } from "@/lib/validation/baby";
 import { actionError, formString, type ActionState } from "./types";
@@ -26,12 +26,24 @@ function readBabyForm(formData: FormData) {
   };
 }
 
+/**
+ * 아기 등록. 세션이 없으면(첫 방문) 로그인 대신 게스트 세션(Supabase 익명 로그인)을 만든 뒤 저장한다.
+ * 게스트도 auth.uid() 를 가지므로 RLS(owns_baby) 가 그대로 적용된다.
+ */
 export async function createBaby(_prev: ActionState, formData: FormData): Promise<ActionState> {
-  const user = await requireUser();
-  const result = validateBabyInput(readBabyForm(formData), { today: todayIsoDate(), userId: user.id });
+  const existingUser = await getCurrentUser();
+  const result = validateBabyInput(readBabyForm(formData), { today: todayIsoDate(), userId: existingUser?.id ?? "" });
   if (!result.ok) return actionError("입력한 내용을 확인해 주세요.", result.errors);
 
   const supabase = await createClient();
+  if (!existingUser) {
+    const { error: guestError } = await supabase.auth.signInAnonymously();
+    if (guestError) {
+      console.error("[createBaby] anonymous sign-in failed", guestError.message);
+      return actionError("지금은 바로 시작할 수 없어요. 잠시 후 다시 시도해 주세요.");
+    }
+  }
+
   const { data, error } = await supabase.from("babies").insert(result.value).select("id").single();
   if (error) return actionError("아기 정보를 저장하지 못했어요. 잠시 후 다시 시도해 주세요.");
 

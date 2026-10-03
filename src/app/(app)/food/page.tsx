@@ -155,7 +155,7 @@ export default async function FoodPage() {
 
       {!context ? (
         <div className="mt-6">
-          <Link href="/signup" className={buttonClass("primary", "lg", "w-full")}>
+          <Link href="/onboarding" className={buttonClass("primary", "lg", "w-full")}>
             ✦ 우리 아기 맞춤 이유식 보기
           </Link>
         </div>

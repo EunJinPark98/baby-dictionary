@@ -15,15 +15,17 @@ export type BabyValidationResult =
 /** 서비스 대상: 0세 중심, 기록 보존을 위해 최대 만 3세까지 등록 허용 */
 export const MAX_BABY_AGE_MONTHS = 36;
 
+/** 이름을 비워 두면 쓰는 기본 이름 (생년월일만 입력해도 시작할 수 있게) */
+export const DEFAULT_BABY_NAME = "우리 아기";
+
 export function validateBabyInput(
   raw: { name: string; birth_date: string; sex: string; photo_path: string },
   context: { today: IsoDate; userId: string },
 ): BabyValidationResult {
   const errors: Partial<Record<keyof BabyInput, string>> = {};
-  const name = raw.name.trim();
+  const name = raw.name.trim() || DEFAULT_BABY_NAME;
 
-  if (name.length === 0) errors.name = "이름이나 애칭을 입력해 주세요.";
-  else if (name.length > 20) errors.name = "이름은 20자 이내로 입력해 주세요.";
+  if (name.length > 20) errors.name = "이름은 20자 이내로 입력해 주세요.";
 
   if (!isValidIsoDate(raw.birth_date)) {
     errors.birth_date = "생년월일을 선택해 주세요.";

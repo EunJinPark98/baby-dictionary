@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getActivities().catch(() => []),
   ]);
 
-  const staticPaths = ["/", "/guide", "/food", "/food/ingredients", "/food/recipes", "/food/fridge", "/play", "/safety", "/signup"];
+  const staticPaths = ["/", "/guide", "/food", "/food/ingredients", "/food/recipes", "/food/fridge", "/play", "/safety"];
 
   return [
     ...staticPaths.map((path) => ({ url: `${base}${path}`, changeFrequency: "weekly" as const, priority: path === "/" ? 1 : 0.7 })),

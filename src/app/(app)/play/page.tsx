@@ -75,7 +75,7 @@ export default async function PlayPage({ searchParams }: PageProps<"/play">) {
         <div className="mt-6">
           <Callout emoji="✨" tone="lavender">
             아기 생년월일을 등록하면 월령에 맞는 놀이를 매일 골라드려요.{" "}
-            <Link href="/signup" className="font-semibold text-gold-700 underline underline-offset-2">
+            <Link href="/onboarding" className="font-semibold text-gold-700 underline underline-offset-2">
               성장지도 만들기
             </Link>
           </Callout>

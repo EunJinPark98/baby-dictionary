@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabasePublicEnv } from "@/lib/env";
-import { AUTH_PAGES, isPrivatePath, matchesPrefix } from "@/lib/routes";
+import { AUTH_PAGES, isPrivatePath, matchesPrefix, signedOutRedirect } from "@/lib/routes";
 import type { Database } from "./database.types";
 
 /**
@@ -33,16 +33,19 @@ export async function updateSession(request: NextRequest) {
   // getClaims() 는 JWT 를 검증하고 필요 시 세션을 갱신한다. 이 호출과 createServerClient 사이에 다른 로직을 두지 않는다.
   const { data } = await supabase.auth.getClaims();
   const isLoggedIn = Boolean(data?.claims?.sub);
+  // 게스트 = 생년월일만 입력하고 시작한 익명 세션. 이메일 로그인 화면은 그대로 쓸 수 있게 둔다.
+  const isGuest = data?.claims?.is_anonymous === true;
 
-  if (!isLoggedIn && privatePath) {
+  const signedOutTarget = isLoggedIn ? null : signedOutRedirect(pathname);
+  if (signedOutTarget) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = signedOutTarget;
     url.search = "";
-    url.searchParams.set("next", pathname + request.nextUrl.search);
+    if (signedOutTarget === "/login") url.searchParams.set("next", pathname + request.nextUrl.search);
     return withPrivacyHeaders(redirectWithCookies(url, response), true);
   }
 
-  if (isLoggedIn && (pathname === "/" || matchesPrefix(pathname, AUTH_PAGES))) {
+  if (isLoggedIn && (pathname === "/" || (!isGuest && matchesPrefix(pathname, AUTH_PAGES)))) {
     const url = request.nextUrl.clone();
     url.pathname = "/today";
     url.search = "";

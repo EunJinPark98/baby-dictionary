@@ -70,7 +70,7 @@ export default async function RecipeDetailPage({ params }: PageProps<"/food/reci
         icon={recipe.emoji}
         title={`${recipe.title}`}
         description={recipe.description}
-        action={<FavoriteButton contentType="recipe" contentId={recipe.id} loginNext={`/food/recipes/${recipe.slug}`} />}
+        action={<FavoriteButton contentType="recipe" contentId={recipe.id} />}
       />
       <div className="flex flex-wrap gap-1.5">
         <Badge tone="star">추천 {formatMonthRange(recipe.min_month, recipe.max_month)}</Badge>

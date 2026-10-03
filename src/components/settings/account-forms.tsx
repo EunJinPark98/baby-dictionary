@@ -53,7 +53,7 @@ export function ChangePasswordForm() {
   );
 }
 
-export function DeleteAccountForm() {
+export function DeleteAccountForm({ guest = false }: { guest?: boolean }) {
   const { state, pending, formRef, onSubmit, errors } = useActionForm(deleteAccount);
   return (
     <form ref={formRef} onSubmit={onSubmit} className="space-y-4" noValidate>
@@ -61,8 +61,8 @@ export function DeleteAccountForm() {
         <TextInput id="confirm" name="confirm" autoComplete="off" placeholder={DELETE_CONFIRM_PHRASE} aria-invalid={Boolean(errors.confirm)} />
       </Field>
       <FormMessage state={state?.fieldErrors ? null : state} />
-      <SubmitButton pending={pending} variant="danger" size="lg" className="w-full" pendingText="탈퇴 처리 중…">
-        모든 기록을 삭제하고 탈퇴하기
+      <SubmitButton pending={pending} variant="danger" size="lg" className="w-full" pendingText={guest ? "삭제하는 중…" : "탈퇴 처리 중…"}>
+        {guest ? "모든 기록 삭제하기" : "모든 기록을 삭제하고 탈퇴하기"}
       </SubmitButton>
     </form>
   );
